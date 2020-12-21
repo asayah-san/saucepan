@@ -1,0 +1,9 @@
+{
+    "app_name": "Saucepan",
+    "button_save": "Save",
+    "button_copy": "Copy",
+    "button_edit": "Edit",
+    "button_remove": "Remove",
+    "input_question": "Question",
+    "input_answer": "Answer"
+}

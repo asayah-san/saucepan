@@ -1,5 +1,6 @@
 import { Component } from 'react';
-import { Clipboard, Trash, Edit2, Save } from 'react-feather';
+import i18n from 'i18next';
+import { Clipboard, Trash, Edit2 } from 'react-feather';
 import ReactMarkdown from 'react-markdown';
 import './Sauces.css';
 
@@ -69,14 +70,16 @@ class Sauces extends Component {
                         <input
                             type="text"
                             id={input_sauce_question}
+                            placeholder={ i18n.t("input_question") }
                             ref={ (a) => this.inputSauceQuestion = a} />
                         <br/>
                         <input
                             type="text"
                             id={input_sauce_answer}
+                            placeholder={ i18n.t("input_answer") }
                             ref={ (a) => this.inputSauceAnswer = a } />
                         <br/>
-                        <button type="submit">Save</button>
+                        <button type="submit">{ i18n.t("button_save") }</button>
                     </form>
                 </div>
             </div>
@@ -85,8 +88,7 @@ class Sauces extends Component {
 }
 
 class SauceList extends Component {
-
-    copy = (sauce) => {
+    onCopyToClipboard = (sauce) => {
         navigator.clipboard.writeText(sauce.id);
     }
 
@@ -102,9 +104,21 @@ class SauceList extends Component {
                             <div className="sauce-answer">
                                 <ReactMarkdown>{ markdown_block.concat(sauce.answer).concat(markdown_block) }</ReactMarkdown>
                             </div>
-                            <button title={"Copy to Clipboard"} onClick={ e => this.copy(sauce) }><Clipboard size={dimen_icon_size} color={color_on_primary}/></button>
-                            <button title={"Edit"} onClick={ e => this.props.edit(sauce) }><Edit2 size={dimen_icon_size} color={color_on_primary}/></button>
-                            <button title={"Remove"} onClick={ e => this.props.remove(sauce)}><Trash size={dimen_icon_size} color={color_on_primary}/></button>
+                            <button 
+                                title={ i18n.t("button_copy") } 
+                                onClick={ e => this.onCopyToClipboard(sauce) }>
+                                    <Clipboard size={dimen_icon_size} color={color_on_primary}/>
+                            </button>
+                            <button 
+                                title={ i18n.t("button_edit") } 
+                                onClick={ e => this.props.edit(sauce) }>
+                                    <Edit2 size={dimen_icon_size} color={color_on_primary}/>
+                            </button>
+                            <button 
+                                title={ i18n.t("button_remove") } 
+                                onClick={ e => this.props.remove(sauce)}>
+                                    <Trash size={dimen_icon_size} color={color_on_primary}/>
+                            </button>
                         </li>
                     );
                 })}
