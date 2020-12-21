@@ -21,10 +21,11 @@ class Sauces extends Component {
         this.state = { sauces: [] }
     }
 
-    insert = (event) => {
+    onInsert = (event) => {
+        event.preventDefault();
+
         if (this.inputSauceQuestion.value === "" ||
             this.inputSauceAnswer.value === "") {
-                alert("question or answer field is empty");
                 return
             }
 
@@ -36,10 +37,12 @@ class Sauces extends Component {
 
         this.setState({ sauces: this.state.sauces.concat(sauce) });
         
-        event.preventDefault();
+        this.inputSauceId.value = ""
+        this.inputSauceQuestion.value = ""
+        this.inputSauceAnswer.value = ""
     }
 
-    remove = (sauce) => {
+    onRemove = (sauce) => {
         var current_sauces = this.state.sauces;
         var index = current_sauces.findIndex(x => x.id === sauce.id);
         if (index > -1) {
@@ -48,25 +51,24 @@ class Sauces extends Component {
         }
     }
 
-    edit = (sauce) => {}
+    onEdit = (sauce) => {}
 
     render() {
         return (
             <div className="component-root">
                 <div className="container">
-                    <SauceList sauces={this.state.sauces} edit={this.edit} remove={this.remove}/>
+                    <SauceList sauces={this.state.sauces} edit={this.onEdit} remove={this.onRemove}/>
                 </div>
                 <div className="container">
-                    <form onSubmit={ e => this.insert(e) }>
+                    <form onSubmit={ e => this.onInsert(e) }>
                         <input 
                             type="hidden"
                             id={input_sauce_id}
                             ref={ (a) => this.inputSauceId = a }/>
                         <br/>
-                        <textarea
+                        <input
+                            type="text"
                             id={input_sauce_question}
-                            rows={8}
-                            cols={4}
                             ref={ (a) => this.inputSauceQuestion = a} />
                         <br/>
                         <input
@@ -74,7 +76,7 @@ class Sauces extends Component {
                             id={input_sauce_answer}
                             ref={ (a) => this.inputSauceAnswer = a } />
                         <br/>
-                        <button type="submit"><Save size={dimen_icon_size} color={color_on_primary}/>Save</button>
+                        <button type="submit">Save</button>
                     </form>
                 </div>
             </div>
@@ -94,15 +96,15 @@ class SauceList extends Component {
                 { this.props.sauces.map( sauce => {
                     return (
                         <li key={sauce.id} className="sauce-container">
-                            <button onClick={ e => this.copy(sauce) }><Clipboard size={dimen_icon_size} color={color_on_primary}/></button>
-                            <button onClick={ e => this.props.edit(sauce) }><Edit2 size={dimen_icon_size} color={color_on_primary}/></button>
-                            <button onClick={ e => this.props.remove(sauce)}><Trash size={dimen_icon_size} color={color_on_primary}/></button>
                             <div className="sauce-question">
                                 <ReactMarkdown>{ markdown_bold.concat(sauce.question).concat(markdown_bold) }</ReactMarkdown>
                             </div>
                             <div className="sauce-answer">
                                 <ReactMarkdown>{ markdown_block.concat(sauce.answer).concat(markdown_block) }</ReactMarkdown>
                             </div>
+                            <button title={"Copy to Clipboard"} onClick={ e => this.copy(sauce) }><Clipboard size={dimen_icon_size} color={color_on_primary}/></button>
+                            <button title={"Edit"} onClick={ e => this.props.edit(sauce) }><Edit2 size={dimen_icon_size} color={color_on_primary}/></button>
+                            <button title={"Remove"} onClick={ e => this.props.remove(sauce)}><Trash size={dimen_icon_size} color={color_on_primary}/></button>
                         </li>
                     );
                 })}

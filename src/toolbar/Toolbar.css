@@ -1,11 +1,11 @@
 .toolbar {
     padding: 16px;
     background-color: var(--color-toolbar);
-    box-shadow: 2px 2px 4px var(--color-tertiary);
+    box-shadow: 2px 2px 2px var(--color-tertiary);
 }
 
 .toolbar .title {
     font-weight: 500;
-    font-size: 1.6em;
+    font-size: 1.4em;
     color: var(--color-on-primary);
 }
