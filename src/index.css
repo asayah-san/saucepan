@@ -1,13 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap');
+
+:root {
+	--color-primary:#4C566A;
+	--color-primary-variant: #3B4252;
+	--color-on-primary: #ECEFF4;
+	--color-secondary: #5E81AC;
+	--color-secondary-variant: #5376a1;
+	--color-on-secondary: #ffffff;
+	--color-tertiary: #434C5E;
+	--color-surface: #ECEFF4;
+	--color-on-surface: var(--color-primary);
+	--color-window-background: var(--color-primary);
+	--color-toolbar: var(--color-primary-variant);
+
+	--dimen-icon-size: 16px;
+	--dimen-medium-padding: 16px;
+	--dimen-small-padding: 8px;
+	--dimen-tiny-padding: 4px;
+	--dimen-surface-radius: 4px;
+}
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	margin: 0;
+	font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+		'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+		sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background-color: var(--color-window-background);
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
