@@ -12,6 +12,7 @@
 	--color-on-surface: var(--color-primary);
 	--color-window-background: var(--color-primary);
 	--color-toolbar: var(--color-primary-variant);
+	--color-secondary-text: var(--color-primary);
 
 	--dimen-icon-size: 16px;
 	--dimen-medium-padding: 16px;
@@ -32,4 +33,8 @@ body {
 
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+::placeholder {
+	color: var(--color-secondary-text);
 }

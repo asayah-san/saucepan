@@ -4,6 +4,11 @@
     "button_copy": "Copy",
     "button_edit": "Edit",
     "button_remove": "Remove",
+    "button_cancel": "Cancel",
     "input_question": "Question",
-    "input_answer": "Answer"
+    "input_answer": "Answer",
+    "input_auto_render": "Render to Markdown",
+    "feedback_sauce_added": "Sauce added",
+    "feedback_sauce_removed": "Sauce removed",
+    "feedback_sauce_updated": "Sauce updated"
 }

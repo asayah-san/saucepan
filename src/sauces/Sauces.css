@@ -1,31 +1,31 @@
-.component-root {
+.container-wrapper {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
-    height: 100vh;
+    height: 100%;
 }
 
-.component-root button {
+.container-wrapper button {
     padding: var(--dimen-tiny-padding);
     background-color: var(--color-secondary);
     border-radius: var(--dimen-surface-radius);
-    border: none;
+    border: 1px solid var(--color-secondary);
     outline: none;
     color: var(--color-on-secondary);
     font-size: 0.9em;
     font-weight: 500;
 }
 
-.component-root button:hover {
+.container-wrapper button:hover {
     cursor: pointer;
     background-color: var(--color-secondary-variant);
+    border: 1px solid var(--color-secondary);
     transition: 0.5s ease-in-out;
 }
 
-.component-root .container {
+.container-wrapper .container {
     width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: column;
     flex-basis: 100%;
@@ -34,7 +34,17 @@
     margin-right: var(--dimen-medium-padding);
 }
 
-.component-root .container form input {
+.container-wrapper .container .switch-label {
+    padding: var(--dimen-medium-padding);
+    color: var(--color-on-primary);
+}
+
+.container-wrapper .container form {
+    margin-left: var(--dimen-medium-padding);
+    margin-right: var(--dimen-medium-padding);
+}
+
+.container-wrapper .container form input {
     width: 100%;
     margin-top: var(--dimen-tiny-padding);
     margin-bottom: var(--dimen-tiny-padding);
@@ -52,12 +62,12 @@
     box-sizing: border-box;
 }
 
-.component-root .container form input:hover {
+.container-wrapper .container form input:hover {
     border: 1px solid var(--color-secondary-variant);
     transition: border 0.3s ease-in-out;
 }
 
-.component-root .container form button {
+.container-wrapper .container form button {
     width: 100%;
     margin-top: var(--dimen-medium-padding);
     padding: var(--dimen-small-padding);

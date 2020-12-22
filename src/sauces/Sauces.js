@@ -1,12 +1,10 @@
 import { Component } from 'react';
 import i18n from 'i18next';
-import { Clipboard, Trash, Edit2 } from 'react-feather';
+import { HiOutlineDuplicate, HiOutlineTrash, HiOutlinePencil } from 'react-icons/hi';
 import ReactMarkdown from 'react-markdown';
-import './Sauces.css';
 
-const style = getComputedStyle(document.body);
-const color_on_primary = style.getPropertyValue("--color-on-primary");
-const dimen_icon_size = style.getPropertyValue("--dimen-icon-size");
+import './Sauces.css';
+import { colorOnPrimary, dimenIconSize } from '../res/colors';
 
 const markdown_bold = "**"
 const markdown_block = "```"
@@ -19,7 +17,12 @@ class Sauces extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { sauces: [] }
+        this.state = { 
+            sauces: [],
+            autoRender: true,
+        }
+
+        this.onAutoRenderStatusChange = this.onAutoRenderStatusChange.bind(this);
     }
 
     onInsert = (event) => {
@@ -44,43 +47,50 @@ class Sauces extends Component {
     }
 
     onRemove = (sauce) => {
-        var current_sauces = this.state.sauces;
-        var index = current_sauces.findIndex(x => x.id === sauce.id);
-        if (index > -1) {
-            current_sauces = current_sauces.splice(index, 1);
-            this.setState({ sauces: current_sauces, });
-        }
+        this.setState({ 
+            sauces: this.state.sauces.filter(function(it) {
+                return it.id !== sauce.id;
+            }) 
+        });
     }
 
     onEdit = (sauce) => {}
 
+    onAutoRenderStatusChange(isAutoRender)  {
+        this.setState({
+            autoRender: isAutoRender,
+        })
+    }
+
     render() {
         return (
-            <div className="component-root">
-                <div className="container">
-                    <SauceList sauces={this.state.sauces} edit={this.onEdit} remove={this.onRemove}/>
-                </div>
-                <div className="container">
-                    <form onSubmit={ e => this.onInsert(e) }>
-                        <input 
-                            type="hidden"
-                            id={input_sauce_id}
-                            ref={ (a) => this.inputSauceId = a }/>
-                        <br/>
-                        <input
-                            type="text"
-                            id={input_sauce_question}
-                            placeholder={ i18n.t("input_question") }
-                            ref={ (a) => this.inputSauceQuestion = a} />
-                        <br/>
-                        <input
-                            type="text"
-                            id={input_sauce_answer}
-                            placeholder={ i18n.t("input_answer") }
-                            ref={ (a) => this.inputSauceAnswer = a } />
-                        <br/>
-                        <button type="submit">{ i18n.t("button_save") }</button>
-                    </form>
+            <div clasName="component-root">
+                <div className="container-wrapper">
+                    <div className="container">
+                        <SauceList sauces={this.state.sauces} edit={this.onEdit} remove={this.onRemove} render={this.state.autoRender}/>
+                    </div>
+                    <div className="container">
+                        <form onSubmit={ e => this.onInsert(e) }>
+                            <input 
+                                type="hidden"
+                                id={input_sauce_id}
+                                ref={ (a) => this.inputSauceId = a }/>
+                            <br/>
+                            <input
+                                type="text"
+                                id={input_sauce_question}
+                                placeholder={ i18n.t("input_question") }
+                                ref={ (a) => this.inputSauceQuestion = a} />
+                            <br/>
+                            <input
+                                type="text"
+                                id={input_sauce_answer}
+                                placeholder={ i18n.t("input_answer") }
+                                ref={ (a) => this.inputSauceAnswer = a } />
+                            <br/>
+                            <button type="submit">{ i18n.t("button_save") }</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         );
@@ -88,36 +98,59 @@ class Sauces extends Component {
 }
 
 class SauceList extends Component {
-    onCopyToClipboard = (sauce) => {
-        navigator.clipboard.writeText(sauce.id);
+    constructor(props) {
+        super(props);
+
+        this.state = { isInEditMode: true, }
+    }
+
+    onCopyToClipboard = (code) => {
+        navigator.clipboard.writeText(code);
     }
 
     render() {
+        const handleMarkdownRender = (question, answer) => {
+            if (this.props.render) 
+                return <div>
+                            <div className="sauce-question">
+                                <ReactMarkdown>{ question }</ReactMarkdown>
+                            </div>
+                            <div className="sauce-answer">
+                                <ReactMarkdown>{ answer }</ReactMarkdown>
+                            </div>
+                        </div>
+            else return <div>
+                            <div className="sauce-question">{question}</div>
+                            <div className="sauce-answer">{answer}</div>
+                        </div>
+        }
+
         return (
             <ul className="sauce-list">
                 { this.props.sauces.map( sauce => {
+                    const question = markdown_bold.concat(sauce.question).concat(markdown_bold)
+                    const answer = markdown_block.concat(sauce.answer).concat(markdown_block)
+                    const code = question.concat("  ").concat(answer)
+
                     return (
                         <li key={sauce.id} className="sauce-container">
-                            <div className="sauce-question">
-                                <ReactMarkdown>{ markdown_bold.concat(sauce.question).concat(markdown_bold) }</ReactMarkdown>
-                            </div>
-                            <div className="sauce-answer">
-                                <ReactMarkdown>{ markdown_block.concat(sauce.answer).concat(markdown_block) }</ReactMarkdown>
+                            <div>
+                                { handleMarkdownRender(question, answer) }
                             </div>
                             <button 
                                 title={ i18n.t("button_copy") } 
-                                onClick={ e => this.onCopyToClipboard(sauce) }>
-                                    <Clipboard size={dimen_icon_size} color={color_on_primary}/>
+                                onClick={ e => this.onCopyToClipboard(code) }>
+                                    <HiOutlineDuplicate size={dimenIconSize} color={colorOnPrimary}/>
                             </button>
                             <button 
                                 title={ i18n.t("button_edit") } 
-                                onClick={ e => this.props.edit(sauce) }>
-                                    <Edit2 size={dimen_icon_size} color={color_on_primary}/>
+                                onClick={ () => this.props.edit(sauce) }>
+                                    <HiOutlinePencil size={dimenIconSize} color={colorOnPrimary}/>
                             </button>
                             <button 
                                 title={ i18n.t("button_remove") } 
-                                onClick={ e => this.props.remove(sauce)}>
-                                    <Trash size={dimen_icon_size} color={color_on_primary}/>
+                                onClick={ () => this.props.remove(sauce)}>
+                                    <HiOutlineTrash size={dimenIconSize} color={colorOnPrimary}/>
                             </button>
                         </li>
                     );
