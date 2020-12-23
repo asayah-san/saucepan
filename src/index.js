@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { I18nextProvider } from 'react-i18next';
-import Saucepan from './core/core';
+import Core from './core/core';
 import i18n from './i18n';
 
 import './index.css';
@@ -9,7 +9,7 @@ import './index.css';
 ReactDOM.render(
 	<React.StrictMode>
 		<I18nextProvider i18n={i18n}>
-			<Saucepan />
+			<Core />
 		</I18nextProvider>
 	</React.StrictMode>,
   document.getElementById('root')

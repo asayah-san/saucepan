@@ -10,5 +10,7 @@
     "input_auto_render": "Render to Markdown",
     "feedback_sauce_added": "Sauce added",
     "feedback_sauce_removed": "Sauce removed",
-    "feedback_sauce_updated": "Sauce updated"
+    "feedback_sauce_updated": "Sauce updated",
+    "editor_new": "New Sauce",
+    "editor_edit": "Edit Sauce"
 }
