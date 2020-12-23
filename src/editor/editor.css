@@ -15,7 +15,7 @@
     left: 50%;
     padding: var(--dimen-medium-padding);
     transform: translate(-50%,-50%);
-    background-color: var(--color-tertiary);
+    background-color: var(--color-surface);
     border-radius: var(--dimen-surface-radius);
 }
 
@@ -34,33 +34,33 @@
     width: 100%;
     margin-top: var(--dimen-medium-padding);
     padding: var(--dimen-small-padding);
-    background-color: var(--color-secondary);
+    background-color: var(--color-primary);
     border-radius: var(--dimen-surface-radius);
     border: none;
     outline: none;
-    color: var(--color-on-secondary);
+    color: var(--color-on-primary);
     font-weight: 500;
     font-size: 0.9em;
 }
 
 .editor-form > button:hover {
     cursor: pointer;
-    background-color: var(--color-secondary-variant);
+    background-color: var(--color-primary-variant);
 }
 
 .editor-form > input {
     width: 100%;
     margin-bottom: var(--dimen-small-padding);
     padding: var(--dimen-small-padding);
-    background-color: var(--color-primary-variant);
+    background-color: var(--color-tertiary);
     border: 1px solid var(--color-primary-variant);
     outline: none;
     border-radius: var(--dimen-surface-radius);
-    color: white;
+    color: var(--color-primary-text);
     font-weight: 400;
     font-size: 1em;
 }
 
 .editor-form > input:hover {
-    border: 1px solid var(--color-secondary);
+    border: 1px solid var(--color-primary);
 }

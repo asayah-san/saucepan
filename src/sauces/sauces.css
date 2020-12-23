@@ -13,8 +13,16 @@
 
 .sauce-container {
     padding: var(--dimen-medium-padding);
-    background-color: var(--color-primary-variant);
-    color: var(--color-on-primary);
+    background-color: var(--color-surface);
+    color: var(--color-primary);
     border-radius: var(--dimen-surface-radius);
-    border: 1px solid var(--color-secondary);
+    border: 1px solid var(--color-primary);
+}
+
+.sauce-container .sauce-question {
+    color: var(--color-primary-text);
+}
+
+.sauce-container .sauce-answer {
+    color: var(--color-primary);
 }

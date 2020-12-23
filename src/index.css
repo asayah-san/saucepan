@@ -1,17 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-	--color-primary:#4C566A;
-	--color-primary-variant: #3B4252;
+	--color-primary:#3aafa9;
+	--color-primary-variant: #2b7a7b;
 	--color-on-primary: #ECEFF4;
-	--color-secondary: #5E81AC;
-	--color-secondary-variant: #5376a1;
+	--color-secondary: #3aafa9;
+	--color-secondary-variant: #2b7a7b;
 	--color-on-secondary: #ffffff;
-	--color-tertiary: #434C5E;
+	--color-tertiary: #def2f1;
 	--color-surface: #ECEFF4;
 	--color-on-surface: var(--color-primary);
-	--color-window-background: var(--color-primary);
+	--color-window-background: #feffff;
 	--color-toolbar: var(--color-primary-variant);
+	--color-primary-text: #17252a;
 	--color-secondary-text: var(--color-primary);
 
 	--dimen-icon-size: 16px;
@@ -36,7 +37,7 @@ code {
 }
 
 ::placeholder {
-	color: var(--color-secondary);
+	
 }
 
 button {
@@ -47,14 +48,14 @@ button {
     padding-bottom: 4px;
     padding-left: 12px;
     padding-right: 12px;
-    background-color: var(--color-secondary);
-    color: var(--color-on-secondary);
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
     border-radius: var(--dimen-surface-radius);
     font-size: 1.2em;
 }
 
 button:hover {
 	cursor: pointer;
-	background-color: var(--color-secondary-variant);
+	background-color: var(--color-primary-variant);
     transition: 0.5s ease-in-out;
 }
