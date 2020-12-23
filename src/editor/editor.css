@@ -1,0 +1,66 @@
+.editor-root {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.editor {
+    position: fixed;
+    width: 30%;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    padding: var(--dimen-medium-padding);
+    transform: translate(-50%,-50%);
+    background-color: var(--color-tertiary);
+    border-radius: var(--dimen-surface-radius);
+}
+
+.editor-show { 
+    visibility: visible; 
+    opacity: 1;
+    transition: visiblity 0s, opacity 0.5s linear;
+}
+.editor-hide { 
+    visibility: hidden; 
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s linear;
+}
+
+.editor-form > button {
+    width: 100%;
+    margin-top: var(--dimen-medium-padding);
+    padding: var(--dimen-small-padding);
+    background-color: var(--color-secondary);
+    border-radius: var(--dimen-surface-radius);
+    border: none;
+    outline: none;
+    color: var(--color-on-secondary);
+    font-weight: 500;
+    font-size: 0.9em;
+}
+
+.editor-form > button:hover {
+    cursor: pointer;
+    background-color: var(--color-secondary-variant);
+}
+
+.editor-form > input {
+    width: 100%;
+    margin-bottom: var(--dimen-small-padding);
+    padding: var(--dimen-small-padding);
+    background-color: var(--color-primary-variant);
+    border: 1px solid var(--color-primary-variant);
+    outline: none;
+    border-radius: var(--dimen-surface-radius);
+    color: white;
+    font-weight: 400;
+    font-size: 1em;
+}
+
+.editor-form > input:hover {
+    border: 1px solid var(--color-secondary);
+}
