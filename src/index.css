@@ -1,20 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-	--color-primary:#3aafa9;
-	--color-primary-variant: #2b7a7b;
-	--color-on-primary: #ECEFF4;
-	--color-secondary: #3aafa9;
-	--color-secondary-variant: #2b7a7b;
-	--color-on-secondary: #ffffff;
-	--color-tertiary: #def2f1;
-	--color-surface: #feffff;
-	--color-on-surface: var(--color-primary);
-	--color-window-background: #feffff;
+	--color-primary: #d32f2f;
+	--color-primary-variant: #9a0007;
+	--color-primary-transparent: #d32f2f1f;
+	--color-on-primary: #ffffff;
+	--color-surface:#212121;
+	--color-on-surface: #ffffff;
+	--color-window-background: #1b1b1b;
 	--color-toolbar: var(--color-primary-variant);
-	--color-primary-text: #17252a;
-	--color-secondary-text: #494949;
-	--color-border: #e0e0e0;
+	--color-primary-text:#ffffff;
+	--color-secondary-text: #aaabb8;
+	--color-border: var(--color-secondary-text);
 
 	--dimen-icon-size: 16px;
 	--dimen-medium-padding: 16px;
@@ -46,11 +43,11 @@ code {
 input {
 	width: 100%;
     margin-bottom: var(--dimen-small-padding);
-    padding: var(--dimen-small-padding);
-    background-color: var(--color-tertiary);
+	padding: var(--dimen-small-padding);
+	border-radius: var(--dimen-surface-radius);
     border: 1px solid var(--color-primary-variant);
-    outline: none;
-    border-radius: var(--dimen-surface-radius);
+	outline: none;
+    background-color: var(--color-surface);
     color: var(--color-primary-text);
     font-weight: 400;
 	font-size: 1em;

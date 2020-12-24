@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { HiX } from 'react-icons/hi';
 import i18n from 'i18next';
 
 import './editor.css';
@@ -16,6 +17,7 @@ class Editor extends Component {
         var _question = "";
         var _answer = "";
         if (this.props.sauce && this.props.sauce) {
+            console.log("true");
             _editorHeader = "editor_edit";
             _id =  this.props.sauce.id;
             _question = this.props.sauce.question;
@@ -52,9 +54,12 @@ class Editor extends Component {
         return (
             <div className={editorStatus}>
                 <div className="editor">
+                    <div className="dismiss-button-wrapper">
+                        <button className="dismiss-button" onClick={this.props.onDismiss}><HiX id="icon"/></button>
+                    </div>
                     <div className="header">{ i18n.t(this.state.editorHeader) }</div>
 
-                    <form className="editor-form" onSubmit={ e => this.props.onInsert(e) }>
+                    <form className="editor-form" onSubmit={ e => this.props.onInsert(this.props.panId, e) }>
                         <input 
                             type="hidden"
                             id={input_sauce_id}

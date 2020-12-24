@@ -22,6 +22,7 @@
 .editor > .header {
     font-weight: 700;
     font-size: 1.2em;
+    color: var(--color-on-surface);
 }
 
 .editor-show { 
@@ -51,4 +52,17 @@
 .editor-form > button:hover {
     cursor: pointer;
     background-color: var(--color-primary-variant);
+}
+
+.dismiss-button {
+    width: 24px;
+    height: 24px;
+    padding: 0px;
+    background-color: transparent;
+    float: right;
+}
+
+.dismiss-button > #icon {
+    display: block;
+    margin: auto;
 }

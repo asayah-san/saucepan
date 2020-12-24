@@ -1,5 +1,7 @@
 {
     "app_name": "Saucepan",
+    "button_add": "Add",
+    "button_new": "New",
     "button_save": "Save",
     "button_copy": "Copy",
     "button_edit": "Edit",
@@ -8,9 +10,11 @@
     "input_question": "Question",
     "input_answer": "Answer",
     "input_auto_render": "Render to Markdown",
+    "feedback_saucepan_added": "Saucepan added",
     "feedback_sauce_added": "Sauce added",
     "feedback_sauce_removed": "Sauce removed",
     "feedback_sauce_updated": "Sauce updated",
     "editor_new": "New Sauce",
-    "editor_edit": "Edit Sauce"
+    "editor_edit": "Edit Sauce",
+    "pan_name_default": "Unnamed Saucepan "
 }

@@ -12,9 +12,63 @@
 
 .core-root > .wrapper > .container:nth-of-type(1) { 
     display: flex;
-    flex: 0.5;
+    flex: 15%;
     justify-content: center;
 }
 .core-root > .wrapper > .container:nth-of-type(2) { 
-    flex: 4;
+    flex: 85%;
+    padding: var(--dimen-medium-padding);
+}
+
+.app-header {
+    padding-top: var(--dimen-medium-padding);
+    padding-bottom: var(--dimen-medium-padding);
+    font-weight: 700;
+    font-size: 1.3em;
+    color: var(--color-primary-text);
+}
+
+.pan-item-container {
+    padding: var(--dimen-medium-padding);
+}
+
+.pan-item-add {
+    width: 100%;
+    margin-top: var(--dimen-tiny-padding);
+    margin-bottom: var(--dimen-tiny-padding);
+    border-radius: var(--dimen-surface-radius);
+    border: 1px solid var(--color-border);
+    background-color: var(--color-surface);
+    color: var(--color-on-surface);
+    font-weight: 500;
+    font-size: 1em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+}
+.pan-item-add:hover {
+    border: 1px solid var(--color-primary); 
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+}
+
+.pan-item {
+    width: 100%;
+    margin-top: var(--dimen-tiny-padding);
+    margin-bottom: var(--dimen-tiny-padding);
+    background-color: var(--color-surface);
+    color: var(--color-primary-text);
+    font-weight: 500;
+    font-size: 1em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: start;
+}
+
+.active, .pan-item:hover {
+    background-color: var(--color-primary-transparent);
+    color: var(--color-primary);
+    transition: 0.5s ease-in-out;
 }

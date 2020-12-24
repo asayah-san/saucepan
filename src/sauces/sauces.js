@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import i18n from 'i18next';
-import { HiOutlineDuplicate, HiOutlineTrash, HiOutlinePencil, HiOutlinePlus } from 'react-icons/hi';
+import { HiOutlinePencil, HiOutlineTrash, HiOutlinePlus } from 'react-icons/hi';
 import ReactMarkdown from 'react-markdown';
 
 import './sauces.css';
@@ -13,28 +13,27 @@ class List extends Component {
     render() {
         return (
             <div className="sauce-list">
-                <button className="add-action" onClick={ this.props.onInsert }>
+                <button className="add-action" onClick={ this.props.onAddAction }>
                     <div className="wrapper">
-                        <HiOutlinePlus/>
-                        <div>Add</div>
+                        <HiOutlinePlus id="icon"/>
                     </div>
                 </button>
                 { this.props.sauces.map( sauce => {
                     return <Item 
-                                key={ sauce.id }
+                                saucepanId={ this.props.saucepanId }
                                 sauce={ sauce }
+                                key={ sauce.id }
                                 autoRender={ this.props.autoRender }
-                                edit={ this.props.onEdit }
-                                remove={ this.props.onRemove }
-                                copy={ this.onCopyToClipboard }
+                                onEdit={ this.props.onEdit }
+                                onRemove={ this.props.onRemove }
+                                onCopy={ this.onCopyToClipboard }
                             />
                 })}
             </div>
         );
     }
         
-    onCopyToClipboard = (code, event) => {
-        event.stopPropagation();
+    onCopyToClipboard = (code) => {
         navigator.clipboard.writeText(code);
     }
 }
@@ -66,21 +65,25 @@ class Item extends Component {
         const output = question.concat("  ").concat(answer);
 
         return (
-            <button key={sauce.id} className="sauce-container" onClick={() => this.props.edit(sauce) }>
+            <button key={sauce.id} className="sauce-container" onClick={() => this.props.onCopy(output) }>
                 <div>
                     { renderToMarkdown(question, answer) }
                 </div>
                 <div className="button-container">
-                    <button 
-                        title={ i18n.t("button_copy") } 
-                        onClick={ (e) => this.props.copy(output, e) }>
-                            <HiOutlineDuplicate size={dimenIconSize} color={colorOnPrimary}/>
-                    </button>
-                    <button 
-                        title={ i18n.t("button_remove") } 
-                        onClick={ (e) => this.props.remove(sauce, e) }>
-                            <HiOutlineTrash size={dimenIconSize} color={colorOnPrimary}/>
-                    </button>
+                    <div className="button-wrapper">
+                        <button
+                            title={ i18n.t("button_copy") } 
+                            onClick={ (e) => this.props.onEdit(this.props.saucepanId, sauce, e) }>
+                                <HiOutlinePencil size={dimenIconSize} color={colorOnPrimary}/>
+                        </button>
+                    </div>
+                    <div className="button-wrapper">
+                        <button
+                            title={ i18n.t("button_remove") } 
+                            onClick={ (e) => this.props.onRemove(this.props.saucepanId, sauce, e) }>
+                                <HiOutlineTrash size={dimenIconSize} color={colorOnPrimary}/>
+                        </button>
+                    </div>
                 </div>
             </button>
         );
