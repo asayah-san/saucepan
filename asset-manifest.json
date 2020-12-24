@@ -1,20 +1,23 @@
 {
   "files": {
-    "main.css": "/saucepan/static/css/main.4ceda5fd.chunk.css",
-    "main.js": "/saucepan/static/js/main.bccd8552.chunk.js",
-    "main.js.map": "/saucepan/static/js/main.bccd8552.chunk.js.map",
+    "main.css": "/saucepan/static/css/main.fd384f6f.chunk.css",
+    "main.js": "/saucepan/static/js/main.73ed9977.chunk.js",
+    "main.js.map": "/saucepan/static/js/main.73ed9977.chunk.js.map",
     "runtime-main.js": "/saucepan/static/js/runtime-main.7588f101.js",
     "runtime-main.js.map": "/saucepan/static/js/runtime-main.7588f101.js.map",
-    "static/js/2.ee1a5c67.chunk.js": "/saucepan/static/js/2.ee1a5c67.chunk.js",
-    "static/js/2.ee1a5c67.chunk.js.map": "/saucepan/static/js/2.ee1a5c67.chunk.js.map",
+    "static/css/2.ccc6f86f.chunk.css": "/saucepan/static/css/2.ccc6f86f.chunk.css",
+    "static/js/2.727db574.chunk.js": "/saucepan/static/js/2.727db574.chunk.js",
+    "static/js/2.727db574.chunk.js.map": "/saucepan/static/js/2.727db574.chunk.js.map",
     "index.html": "/saucepan/index.html",
-    "static/css/main.4ceda5fd.chunk.css.map": "/saucepan/static/css/main.4ceda5fd.chunk.css.map",
-    "static/js/2.ee1a5c67.chunk.js.LICENSE.txt": "/saucepan/static/js/2.ee1a5c67.chunk.js.LICENSE.txt"
+    "static/css/2.ccc6f86f.chunk.css.map": "/saucepan/static/css/2.ccc6f86f.chunk.css.map",
+    "static/css/main.fd384f6f.chunk.css.map": "/saucepan/static/css/main.fd384f6f.chunk.css.map",
+    "static/js/2.727db574.chunk.js.LICENSE.txt": "/saucepan/static/js/2.727db574.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.7588f101.js",
-    "static/js/2.ee1a5c67.chunk.js",
-    "static/css/main.4ceda5fd.chunk.css",
-    "static/js/main.bccd8552.chunk.js"
+    "static/css/2.ccc6f86f.chunk.css",
+    "static/js/2.727db574.chunk.js",
+    "static/css/main.fd384f6f.chunk.css",
+    "static/js/main.73ed9977.chunk.js"
   ]
 }
