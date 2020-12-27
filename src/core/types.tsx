@@ -10,4 +10,4 @@ type Pan = {
     sauces: Sauce[]
 }
 
-export { Sauce, Pan }
+export type { Sauce, Pan }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { HiX } from "react-icons/hi";
-import i18next from "i18next";
+import { HiX } from 'react-icons/hi';
+import i18n from '../i18n';
 
 import './form.css';
 
@@ -29,7 +29,7 @@ class Creator extends Component<CreatorProps, {}> {
                     <div className="dismiss-button-container">
                         <button className="dismiss-button" onClick={() => this.props.onDismiss()}><HiX id="icon"/></button>
                     </div>
-                    <div className="header">{i18next.t("header_create_sauce")}</div>
+                    <div className="header">{i18n.t("header_create_sauce")}</div>
 
                     <form className="editor-form" onSubmit={e => this.props.onSubmit(this.props.saucepanId, e)}>
                         <input
@@ -37,19 +37,19 @@ class Creator extends Component<CreatorProps, {}> {
                             id={insert_sauce_id}
                             name={insert_sauce_id}/>
                         <br/>
-                        <label>{i18next.t("input_question")}</label>
+                        <label>{i18n.t("input_question")}</label>
                         <input
                             type="text"
                             id={insert_sauce_question}
                             name={insert_sauce_question}/>
                         <br/>
-                        <label>{i18next.t("input_answer")}</label>
+                        <label>{i18n.t("input_answer")}</label>
                         <input
                             type="text"
                             id={insert_sauce_answer}
                             name={insert_sauce_answer}/>
                         <br/>
-                        <button type="submit">{i18next.t("button_save")}</button>
+                        <button type="submit">{i18n.t("button_save")}</button>
                     </form>
                 </div>
             </div>
@@ -93,7 +93,7 @@ class Editor extends Component<EditorProps, EditorState> {
                     <div className="dismiss-button-container">
                         <button className="dismiss-button" onClick={() => this.props.onDismiss()}><HiX id="icon"/></button>
                     </div>
-                    <div className="header">{i18next.t("header_edit_sauce")}</div>
+                    <div className="header">{i18n.t("header_edit_sauce")}</div>
 
                     <form className="editor-form"
                           onSubmit={e => this.props.onSubmit(this.props.saucepanId, this.props.id, e)}>
@@ -104,7 +104,7 @@ class Editor extends Component<EditorProps, EditorState> {
                             value={this.state.id}
                             onChange={e => this.onInputChanged(e)}/>
                         <br/>
-                        <label>{i18next.t("input_question")}</label>
+                        <label>{i18n.t("input_question")}</label>
                         <input
                             type="text"
                             id={update_sauce_question}
@@ -112,7 +112,7 @@ class Editor extends Component<EditorProps, EditorState> {
                             value={this.state.question}
                             onChange={e => this.onInputChanged(e)}/>
                         <br/>
-                        <label>{i18next.t("input_answer")}</label>
+                        <label>{i18n.t("input_answer")}</label>
                         <input
                             type="text"
                             id={update_sauce_answer}
@@ -120,7 +120,7 @@ class Editor extends Component<EditorProps, EditorState> {
                             value={this.state.answer}
                             onChange={e => this.onInputChanged(e)}/>
                         <br/>
-                        <button type="submit">{i18next.t("button_save")}</button>
+                        <button type="submit">{i18n.t("button_save")}</button>
                     </form>
                 </div>
             </div>

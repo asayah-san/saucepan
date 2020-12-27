@@ -4,7 +4,7 @@ import { Creator, Editor } from '../form/form';
 import { HiOutlinePlus } from "react-icons/all";
 import { Saucepan } from '../saucepan/saucepan';
 import { Sauce, Pan } from './types';
-import i18next from 'i18next';
+import i18n from '../i18n';
 
 import 'react-toastify/dist/ReactToastify.css';
 import './core.css';
@@ -42,6 +42,7 @@ class Core extends Component<{}, State> {
     }
 
     render() {
+
         const renderSaucepanList = () => {
             return (<div>{
                 this.state.saucepans.map(saucepan => {
@@ -68,9 +69,8 @@ class Core extends Component<{}, State> {
 
                 return <Saucepan
                             data={saucepan}
-                            autoRender={this.state.isSauceRenderedInMarkdown}
+                            autoRenderToMarkdown={this.state.isSauceRenderedInMarkdown}
                             isInHeaderEditMode={this.state.isInHeaderEditMode}
-                            onInsert={this.onSauceInsert}
                             onRemove={this.onSauceRemove}
                             onEdit={this.onSauceEdit}
                             onCreate={this.onEnterCreateMode}
@@ -83,7 +83,7 @@ class Core extends Component<{}, State> {
         const renderSaucepanHeader = saucepan => {
             if (saucepan.name !== null)
                 return <span>{saucepan.name}</span>
-            else return <span>{i18next.t("pan_name_fallback")}</span>
+            else return <span>{i18n.t("pan_name_fallback")}</span>
         }
 
         const renderSauceForm = () => {
@@ -112,7 +112,7 @@ class Core extends Component<{}, State> {
                 <div className="wrapper">
                     <div className="container">
                         <div className="navigation-container">
-                            <div className="header">{i18next.t("app_name")}</div>
+                            <div className="header">{i18n.t("app_name")}</div>
                             <button className="saucepan-add" onClick={this.onSaucepanAdded}>
                                 <HiOutlinePlus/>
                             </button>
@@ -261,7 +261,7 @@ class Core extends Component<{}, State> {
     }
 
     onShowToastNotification = (message: string) => {
-        toast.dark(i18next.t(message), {
+        toast.dark(i18n.t(message), {
             position: "bottom-right",
             autoClose: 3000,
             hideProgressBar: false,
