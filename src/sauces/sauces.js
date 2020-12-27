@@ -4,7 +4,6 @@ import { HiOutlinePencil, HiOutlineTrash, HiOutlinePlus } from 'react-icons/hi';
 import ReactMarkdown from 'react-markdown';
 
 import './sauces.css';
-import { dimenIconSize, colorOnPrimary } from '../res';
 
 const md_bold = "**"
 const md_code = "```"
@@ -70,14 +69,14 @@ class Item extends Component {
                         <button
                             title={ i18n.t("button_copy") } 
                             onClick={ (e) => this.props.onEdit(sauce, e) }>
-                                <HiOutlinePencil size={dimenIconSize} color={colorOnPrimary}/>
+                                <HiOutlinePencil/>
                         </button>
                     </div>
                     <div className="button-wrapper">
                         <button
                             title={ i18n.t("button_remove") } 
                             onClick={ (e) => this.props.onRemove(this.props.saucepanId, sauce, e) }>
-                                <HiOutlineTrash size={dimenIconSize} color={colorOnPrimary}/>
+                                <HiOutlineTrash/>
                         </button>
                     </div>
                 </div>

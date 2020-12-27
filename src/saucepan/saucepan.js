@@ -8,8 +8,7 @@ import './saucepan.css';
 const input_header_id = "input_id";
 const input_header_name = "input_name";
 
-class Saucepan extends Component {
-
+class Saucepan extends Component{
 	render() {
 		return (
 			<div className="saucepan-root">
@@ -93,4 +92,4 @@ class SaucepanHeader extends Component {
     }
 }
 
-export { Saucepan as SaucepanView };
+export { Saucepan };

@@ -2,30 +2,15 @@ import React, { Component, FormEvent } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { Creator, Editor } from '../form/form';
 import { HiOutlinePlus } from "react-icons/all";
-import { SaucepanView } from '../saucepan/saucepan';
+import { Saucepan } from '../saucepan/saucepan';
+import { Sauce, Pan } from './types';
 import i18next from 'i18next';
 
 import 'react-toastify/dist/ReactToastify.css';
 import './core.css';
 
-type Sauce = {
-    id: number,
-    question: string,
-    answer: string
-}
-
-type Saucepan = {
-    id: number,
-    name: string,
-    sauces: Sauce[]
-}
-
-type Props = {
-
-}
-
 type State = {
-    saucepans: Saucepan[],
+    saucepans: Pan[],
     currentSaucepanId: number,
     isSauceRenderedInMarkdown: boolean,
     isInCreateMode: boolean,
@@ -34,11 +19,11 @@ type State = {
     currentSauce: Sauce
 }
 
-class Core extends Component<Props, State> {
+class Core extends Component<{}, State> {
     constructor(props) {
         super(props);
 
-        const saucepan: Saucepan = {
+        const saucepan: Pan = {
             id: Date.now(),
             name: null,
             sauces: []
@@ -81,7 +66,7 @@ class Core extends Component<Props, State> {
             if (index > -1) {
                 const saucepan = this.state.saucepans[index];
 
-                return <SaucepanView
+                return <Saucepan
                             data={saucepan}
                             autoRender={this.state.isSauceRenderedInMarkdown}
                             isInHeaderEditMode={this.state.isInHeaderEditMode}
@@ -153,8 +138,8 @@ class Core extends Component<Props, State> {
         this.onShowToastNotification("feedback_saucepan_added");
     }
     
-    onSaucepanModified = (saucepan: Saucepan) => {
-        let currentSaucepans: Saucepan[] = this.state.saucepans;
+    onSaucepanModified = (saucepan: Pan) => {
+        let currentSaucepans: Pan[] = this.state.saucepans;
         
         let index = currentSaucepans.findIndex(pan => saucepan.id === pan.id);
         if (index > - 1) {
@@ -166,7 +151,7 @@ class Core extends Component<Props, State> {
         }
     }
 
-    onSaucepanSwitched = (saucepan: Saucepan) => {
+    onSaucepanSwitched = (saucepan: Pan) => {
         this.setState({ currentSaucepanId: saucepan.id });
     }
 
@@ -177,11 +162,11 @@ class Core extends Component<Props, State> {
     onSaucepanHeaderChanged = event => {
         event.preventDefault();
 
-        const id = event.target[0].value;
-        const name = event.target[1].value;
+        const id: number = +event.target[0].value;
+        const name: string = event.target[1].value;
 
-        if (id !== "" && name !== "") {
-            var saucepan = this.state.saucepans.find(saucepan => saucepan.id == id);
+        if (id !== null && name !== null) {
+            const saucepan = this.state.saucepans.find(saucepan => saucepan.id === id);
 
             if (saucepan) {
                 saucepan.name = name;
@@ -195,11 +180,11 @@ class Core extends Component<Props, State> {
     onSauceInsert = (saucepanId: number, event: FormEvent) => {
         event.preventDefault();
 
-        var _question: string = event.target[1].value;
-        var _answer: string = event.target[2].value;
-        if (_question === "" || _answer === "") {
+        const _question: string = event.target[1].value;
+        const _answer: string = event.target[2].value;
+
+        if (_question === "" || _answer === "")
                 return
-            }
 
         const sauce: Sauce = {
             id: Date.now(),
@@ -287,11 +272,31 @@ class Core extends Component<Props, State> {
         })
     }
 
-    onEnterCreateMode = () => { this.setState({ isInCreateMode: true, currentSauce: null, isInEditMode: false }); }
-    onExitCreateMode = () => { this.setState({ isInCreateMode: false, currentSauce: null }); }
+    onEnterCreateMode = () => {
+        this.setState({
+            isInCreateMode: true,
+            isInEditMode: false,
+        });
+    }
+    onExitCreateMode = () => {
+        this.setState({
+            isInCreateMode: false,
+            currentSauce: null
+        });
+    }
 
-    onEnterEditMode = () => { this.setState({ isInEditMode: true }); }
-    onExitEditMode = () => { this.setState({ isInEditMode: false, currentSauce: null, isInCreateMode: false }); }
+    onEnterEditMode = () => {
+        this.setState({
+            isInEditMode: true
+        });
+    }
+    onExitEditMode = () => {
+        this.setState({
+            isInCreateMode: false,
+            isInEditMode: false,
+            currentSauce: null,
+        });
+    }
 }
 
 export { Core }
