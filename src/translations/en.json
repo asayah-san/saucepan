@@ -14,7 +14,8 @@
     "feedback_sauce_added": "Sauce added",
     "feedback_sauce_removed": "Sauce removed",
     "feedback_sauce_updated": "Sauce updated",
-    "editor_new": "New Sauce",
-    "editor_edit": "Edit Sauce",
-    "pan_name_default": "Unnamed Saucepan "
+    "feedback_sauce_copied": "Sauce copied",
+    "header_create_sauce": "Create Sauce",
+    "header_edit_sauce": "Edit Sauce",
+    "pan_name_fallback": "Unnamed Saucepan "
 }

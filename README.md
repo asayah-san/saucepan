@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Saucepan
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Saucepan is a simple webapp for easier question-answer formatting to markdown. It is specifically built for a group of students, who are now collaborating in Discord.
 
 ## Available Scripts
 

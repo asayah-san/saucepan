@@ -45,9 +45,9 @@ input {
     margin-bottom: var(--dimen-small-padding);
 	padding: var(--dimen-small-padding);
 	border-radius: var(--dimen-surface-radius);
-    border: 1px solid var(--color-primary-variant);
+    border: 1px solid var(--color-secondary-text);
 	outline: none;
-    background-color: var(--color-surface);
+    background-color: var(--color-window-background);
     color: var(--color-primary-text);
     font-weight: 400;
 	font-size: 1em;
@@ -58,21 +58,20 @@ input:hover {
 }
 
 ::placeholder {
-	color: var(--color-primary);
+	color: var(--color-secondary-text);
 }
 
 button {
 	border: none;
     outline: none;
     margin-right: var(--dimen-small-padding);
-	padding-top: 8px;
-    padding-bottom: 4px;
-    padding-left: 12px;
-    padding-right: 12px;
-    background-color: var(--color-primary);
+	padding: 8px 32px 6px;
+	background-color: var(--color-primary);
     color: var(--color-on-primary);
-    border-radius: var(--dimen-surface-radius);
-    font-size: 1.2em;
+	border-radius: var(--dimen-surface-radius);
+	font-weight: 500;
+	font-size: 1em;
+	text-transform: uppercase;
 }
 
 button:hover {

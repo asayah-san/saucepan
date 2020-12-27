@@ -1,63 +1,58 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import i18n from 'i18next';
 import { HiOutlinePencil, HiOutlineTrash, HiOutlinePlus } from 'react-icons/hi';
 import ReactMarkdown from 'react-markdown';
 
 import './sauces.css';
-import { colorOnPrimary, dimenIconSize } from '../res';
+import { dimenIconSize, colorOnPrimary } from '../res';
 
 const md_bold = "**"
 const md_code = "```"
 
 class List extends Component {
     render() {
+        const renderItem = sauce => {
+            return <Item
+                        key={sauce.id}
+                        sauce={sauce}
+                        saucepanId={this.props.saucepanId}
+                        autoRender={this.props.autoRender}
+                        onEdit={this.props.onEdit}
+                        onRemove={this.props.onRemove}
+                        onCopy={this.props.onCopy}
+                    />
+        }
+
         return (
             <div className="sauce-list">
-                <button className="add-action" onClick={ this.props.onAddAction }>
+                <button className="add-action" onClick={this.props.onCreate}>
                     <div className="wrapper">
                         <HiOutlinePlus id="icon"/>
                     </div>
                 </button>
-                { this.props.sauces.map( sauce => {
-                    return <Item 
-                                saucepanId={ this.props.saucepanId }
-                                sauce={ sauce }
-                                key={ sauce.id }
-                                autoRender={ this.props.autoRender }
-                                onEdit={ this.props.onEdit }
-                                onRemove={ this.props.onRemove }
-                                onCopy={ this.onCopyToClipboard }
-                            />
-                })}
+                {this.props.sauces.map(sauce => renderItem(sauce))}
             </div>
         );
-    }
-        
-    onCopyToClipboard = (code) => {
-        navigator.clipboard.writeText(code);
     }
 }
 
 class Item extends Component {
     render() {
         const sauce = this.props.sauce;
-        
-        const renderToMarkdown = (question, answer) => {
-            if (this.props.autoRender) {
-                return <div>
-                            <div className="sauce-question">
-                                <ReactMarkdown>{ question }</ReactMarkdown>
-                            </div>
-                            <div className="sauce-answer">
-                                <ReactMarkdown>{ answer }</ReactMarkdown>
-                            </div>
-                        </div>
-            } else {
-                return  <div>
-                            <div className="sauce-question">{question}</div>
-                            <div className="sauce-answer">{answer}</div>
-                        </div>
-            }
+
+        const renderQuestion = question => {
+            if (this.props.autoRender)
+                return <div className="sauce-question">
+                    <ReactMarkdown>{question}</ReactMarkdown>
+                </div>
+            else return <div className="sauce-question">{question}</div>
+        }
+        const renderAnswer = answer => {
+            if (this.props.autoRender)
+                return <div className="sauce-answer">
+                    <ReactMarkdown>{answer}</ReactMarkdown>
+                </div>
+            else return <div className="sauce-answer">{answer}</div>
         }
 
         const question = md_bold.concat(sauce.question).concat(md_bold);
@@ -65,15 +60,16 @@ class Item extends Component {
         const output = question.concat("  ").concat(answer);
 
         return (
-            <button key={sauce.id} className="sauce-container" onClick={() => this.props.onCopy(output) }>
+            <div className="sauce-container" onClick={() => this.props.onCopy(output)}>
                 <div>
-                    { renderToMarkdown(question, answer) }
+                    {renderQuestion(question)}
+                    {renderAnswer(answer)}
                 </div>
                 <div className="button-container">
                     <div className="button-wrapper">
                         <button
                             title={ i18n.t("button_copy") } 
-                            onClick={ (e) => this.props.onEdit(this.props.saucepanId, sauce, e) }>
+                            onClick={ (e) => this.props.onEdit(sauce, e) }>
                                 <HiOutlinePencil size={dimenIconSize} color={colorOnPrimary}/>
                         </button>
                     </div>
@@ -85,7 +81,7 @@ class Item extends Component {
                         </button>
                     </div>
                 </div>
-            </button>
+            </div>
         );
     }
 }

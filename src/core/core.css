@@ -14,31 +14,33 @@
     display: flex;
     flex: 15%;
     justify-content: center;
+    border-right: 2px solid var(--color-surface);
 }
 .core-root > .wrapper > .container:nth-of-type(2) { 
     flex: 85%;
     padding: var(--dimen-medium-padding);
 }
 
-.app-header {
-    padding-top: var(--dimen-medium-padding);
-    padding-bottom: var(--dimen-medium-padding);
-    font-weight: 700;
-    font-size: 1.3em;
-    color: var(--color-primary-text);
+.core-root > .wrapper > .container:nth-of-type(3) {
+    flex: 30%;
+    justify-content: center;
 }
 
-.pan-item-container {
-    padding: var(--dimen-medium-padding);
-}
-
-.pan-item-add {
+.navigation-container {
     width: 100%;
-    margin-top: var(--dimen-tiny-padding);
-    margin-bottom: var(--dimen-tiny-padding);
-    border-radius: var(--dimen-surface-radius);
-    border: 1px solid var(--color-border);
-    background-color: var(--color-surface);
+    padding: var(--dimen-small-padding);
+}
+
+.navigation-container > .header {
+    font-weight: 700;
+    font-size: 1.6em;
+    padding: var(--dimen-medium-padding) 0;
+}
+
+.navigation-container .saucepan-add {
+    margin: var(--dimen-small-padding) auto;
+    padding: 8px 16px 6px;
+    background-color: var(--color-primary);
     color: var(--color-on-surface);
     font-weight: 500;
     font-size: 1em;
@@ -47,27 +49,32 @@
     text-overflow: ellipsis;
     text-align: center;
 }
-.pan-item-add:hover {
-    border: 1px solid var(--color-primary); 
+
+.navigation-container .saucepan-add:hover {
     background-color: var(--color-primary);
     color: var(--color-on-primary);
 }
 
-.pan-item {
+.navigation-container .saucepan-item {
     width: 100%;
-    margin-top: var(--dimen-tiny-padding);
-    margin-bottom: var(--dimen-tiny-padding);
-    background-color: var(--color-surface);
-    color: var(--color-primary-text);
+    margin: var(--dimen-tiny-padding) 0;
+    padding: var(--dimen-small-padding);
+    background-color: var(--color-window-background);
+    color: var(--color-secondary-text);
     font-weight: 500;
     font-size: 1em;
     white-space: nowrap;
     overflow: hidden;
+    text-transform: capitalize;
     text-overflow: ellipsis;
     text-align: start;
 }
 
-.active, .pan-item:hover {
+.navigation-container .saucepan-item:hover {
+    color: var(--color-on-surface);
+}
+
+.navigation-container .active {
     background-color: var(--color-primary-transparent);
     color: var(--color-primary);
     transition: 0.5s ease-in-out;
