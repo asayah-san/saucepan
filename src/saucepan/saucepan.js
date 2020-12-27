@@ -93,4 +93,4 @@ class SaucepanHeader extends Component {
     }
 }
 
-export default Saucepan;
+export { Saucepan as SaucepanView };

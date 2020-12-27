@@ -1,23 +1,51 @@
-import React, { Component } from 'react';
+import React, { Component, FormEvent } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { Creator, Editor } from '../form/form';
 import { HiOutlinePlus } from "react-icons/all";
-import Saucepan from '../saucepan/saucepan';
+import { SaucepanView } from '../saucepan/saucepan';
 import i18next from 'i18next';
 
 import 'react-toastify/dist/ReactToastify.css';
 import './core.css';
 
+type Sauce = {
+    id: number,
+    question: string,
+    answer: string
+}
 
-class Core extends Component {
+type Saucepan = {
+    id: number,
+    name: string,
+    sauces: Sauce[]
+}
+
+type Props = {
+
+}
+
+type State = {
+    saucepans: Saucepan[],
+    currentSaucepanId: number,
+    isSauceRenderedInMarkdown: boolean,
+    isInCreateMode: boolean,
+    isInEditMode: boolean,
+    isInHeaderEditMode: boolean,
+    currentSauce: Sauce
+}
+
+class Core extends Component<Props, State> {
     constructor(props) {
         super(props);
 
-        const _currentSaucepanId = Date.now()
-        console.log(_currentSaucepanId);
+        const saucepan: Saucepan = {
+            id: Date.now(),
+            name: null,
+            sauces: []
+        }
         this.state = { 
-            saucepans: [ { id: _currentSaucepanId, name: null, sauces: [] } ],
-            currentSaucepanId: _currentSaucepanId,
+            saucepans: [ saucepan ],
+            currentSaucepanId: saucepan.id,
 
             isSauceRenderedInMarkdown: true,
             isInCreateMode: false,
@@ -29,7 +57,7 @@ class Core extends Component {
     }
 
     render() {
-        const renderSaucepanList = _ => {
+        const renderSaucepanList = () => {
             return (<div>{
                 this.state.saucepans.map(saucepan => {
                     let saucepanItemClassName = "saucepan-item";
@@ -47,13 +75,13 @@ class Core extends Component {
             }</div>)
         }
 
-        const renderSaucepan = _ => {
+        const renderSaucepan = () => {
             const index = this.state.saucepans.findIndex(saucepan => saucepan.id === this.state.currentSaucepanId);
 
             if (index > -1) {
                 const saucepan = this.state.saucepans[index];
 
-                return <Saucepan
+                return <SaucepanView
                             data={saucepan}
                             autoRender={this.state.isSauceRenderedInMarkdown}
                             isInHeaderEditMode={this.state.isInHeaderEditMode}
@@ -73,7 +101,7 @@ class Core extends Component {
             else return <span>{i18next.t("pan_name_fallback")}</span>
         }
 
-        const renderSauceForm = _ => {
+        const renderSauceForm = () => {
             if (this.state.currentSauce !== null && this.state.isInEditMode) {
                 const sauce = this.state.currentSauce;
 
@@ -125,23 +153,24 @@ class Core extends Component {
         this.onShowToastNotification("feedback_saucepan_added");
     }
     
-    onSaucepanModified = saucepan => {
-        let currentSaucepans = this.state.saucepans;
+    onSaucepanModified = (saucepan: Saucepan) => {
+        let currentSaucepans: Saucepan[] = this.state.saucepans;
+        
         let index = currentSaucepans.findIndex(pan => saucepan.id === pan.id);
         if (index > - 1) {
             currentSaucepans[index] = saucepan;
 
             this.setState({
-                pans: currentSaucepans,
+                saucepans: currentSaucepans,
             });
         }
     }
 
-    onSaucepanSwitched = saucepan => {
+    onSaucepanSwitched = (saucepan: Saucepan) => {
         this.setState({ currentSaucepanId: saucepan.id });
     }
 
-    onSaucepanHeaderEdit = status => {
+    onSaucepanHeaderEdit = (status: boolean) => {
         this.setState({ isInHeaderEditMode: status });
     }
 
@@ -163,48 +192,46 @@ class Core extends Component {
         }
     }
 
-    onSauceInsert = (saucepanId, event) => {
+    onSauceInsert = (saucepanId: number, event: FormEvent) => {
         event.preventDefault();
 
-        if (event.target._insert_question.value === "" ||
-            event.target._insert_answer.value === "") {
+        var _question: string = event.target[1].value;
+        var _answer: string = event.target[2].value;
+        if (_question === "" || _answer === "") {
                 return
             }
 
-        const sauce = {
+        const sauce: Sauce = {
             id: Date.now(),
-            question: event.target._insert_question.value,
-            answer: event.target._insert_answer.value
+            question: _question,
+            answer: _answer
         };
 
-        const index = this.state.saucepans.findIndex(saucepan => saucepanId === saucepan.id);
-        if (index > -1) {
-            const saucepan = this.state.saucepans[index];
+        const saucepan = this.state.saucepans.find(saucepan => saucepanId === saucepan.id);
+        if (saucepan) {
             saucepan.sauces = saucepan.sauces.concat(sauce);
+            
             this.onSaucepanModified(saucepan);
-
             this.onShowToastNotification("feedback_sauce_added");
             this.onExitCreateMode();
         }
     }
 
-    onSauceRemove = (saucepanId, sauce, event) => {
+    onSauceRemove = (saucepanId: number, sauce: Sauce, event: FormEvent) => {
         event.stopPropagation();
 
-        const index = this.state.pans.findIndex(saucepan => saucepan.id === saucepanId);
-
-        if (index > -1) {
-            const pan = this.state.pans[index];
-            pan.sauces = pan.sauces.filter(function(it) {
+        const saucepan = this.state.saucepans.find(saucepan => saucepan.id === saucepanId);
+        if (saucepan) {
+            saucepan.sauces = saucepan.sauces.filter(function(it) {
                 return it.id !== sauce.id;
             });
 
+            this.onSaucepanModified(saucepan);
             this.onShowToastNotification("feedback_sauce_removed");
-            this.onSaucepanModified(pan);
         }
     }
 
-    onSauceEdit = (sauce, event) => {
+    onSauceEdit = (sauce: Sauce, event: FormEvent) => {
         event.stopPropagation();
 
         this.setState({
@@ -213,41 +240,42 @@ class Core extends Component {
         });
     }
 
-    onSauceUpdate = (saucepanId, sauceId, event) => {
+    onSauceUpdate = (saucepanId: number, sauceId: number, event: FormEvent) => {
         event.preventDefault();
 
-        if (event.target._update_question.value === "" ||
-            event.target._update_answer.value === "") {
+        const _question = event.target[1].value;
+        const _answer = event.target[2].value;
+        if (_question === "" || _answer === "") {
             return
         }
 
-        const index = this.state.saucepans.findIndex(saucepan => saucepanId === saucepan.id);
-        if (index > -1) {
-            const saucepan = this.state.saucepans[index];
+        const saucepan = this.state.saucepans.find(saucepan => saucepan.id === saucepanId);
 
-            const sauceIndex = saucepan.sauces.findIndex(sauce => sauce.id === sauceId);
-            if (sauceIndex > -1) {
-                const sauce = saucepan.sauces[sauceIndex];
-                sauce.question = event.target._update_question.value;
-                sauce.answer = event.target._update_answer.value;
+        if (saucepan) {
+            const index = saucepan.sauces.findIndex(sauce => sauce.id === sauceId);
 
-                saucepan.sauces[sauceIndex] = sauce;
+            if (index > -1) {
+                const sauce = saucepan.sauces[index];
+                sauce.question = _question;
+                sauce.answer = _answer;
+
+                saucepan.sauces[index] = sauce;
+
                 this.onSaucepanModified(saucepan);
-
                 this.onShowToastNotification("feedback_sauce_updated");
                 this.onExitEditMode();
             }
         }
     }
 
-    onSauceCopied = output => {
+    onSauceCopied = (output: string) => {
         navigator.clipboard.writeText(output)
             .then(() => {
                 this.onShowToastNotification("feedback_sauce_copied");
             });
     }
 
-    onShowToastNotification = (message) => {
+    onShowToastNotification = (message: string) => {
         toast.dark(i18next.t(message), {
             position: "bottom-right",
             autoClose: 3000,
@@ -259,11 +287,11 @@ class Core extends Component {
         })
     }
 
-    onEnterCreateMode = _ => { this.setState({ isInCreateMode: true, currentSauce: null, isInEditMode: false }); }
-    onExitCreateMode = _ => { this.setState({ isInCreateMode: false, currentSauce: null }); }
+    onEnterCreateMode = () => { this.setState({ isInCreateMode: true, currentSauce: null, isInEditMode: false }); }
+    onExitCreateMode = () => { this.setState({ isInCreateMode: false, currentSauce: null }); }
 
-    onEnterEditMode = _ => { this.setState({ isInEditMode: true }); }
-    onExitEditMode = _ => { this.setState({ isInEditMode: false, currentSauce: null, isInCreateMode: false }); }
+    onEnterEditMode = () => { this.setState({ isInEditMode: true }); }
+    onExitEditMode = () => { this.setState({ isInEditMode: false, currentSauce: null, isInCreateMode: false }); }
 }
 
 export { Core }

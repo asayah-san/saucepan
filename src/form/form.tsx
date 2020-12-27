@@ -12,7 +12,14 @@ const update_sauce_id = "_update_id";
 const update_sauce_question = "_update_question";
 const update_sauce_answer = "_update_answer";
 
-class Creator extends Component {
+type CreatorProps = {
+    saucepanId: number,
+    isShown: boolean,
+    onDismiss: Function,
+    onSubmit: Function,
+}
+
+class Creator extends Component<CreatorProps, {}> {
     render() {
         const rootClassName = this.props.isShown ? "container container-show" : "container container-hide";
 
@@ -20,7 +27,7 @@ class Creator extends Component {
             <div className={rootClassName}>
                 <div className="wrapper">
                     <div className="dismiss-button-container">
-                        <button className="dismiss-button" onClick={this.props.onDismiss}><HiX id="icon"/></button>
+                        <button className="dismiss-button" onClick={() => this.props.onDismiss()}><HiX id="icon"/></button>
                     </div>
                     <div className="header">{i18next.t("header_create_sauce")}</div>
 
@@ -28,22 +35,19 @@ class Creator extends Component {
                         <input
                             type="hidden"
                             id={insert_sauce_id}
-                            name={insert_sauce_id}
-                            ref={ (a) => this.inputSauceId = a }/>
+                            name={insert_sauce_id}/>
                         <br/>
                         <label>{i18next.t("input_question")}</label>
                         <input
                             type="text"
                             id={insert_sauce_question}
-                            name={insert_sauce_question}
-                            ref={ (a) => this.inputSauceQuestion = a}/>
+                            name={insert_sauce_question}/>
                         <br/>
                         <label>{i18next.t("input_answer")}</label>
                         <input
                             type="text"
                             id={insert_sauce_answer}
-                            name={insert_sauce_answer}
-                            ref={ (a) => this.inputSauceAnswer = a }/>
+                            name={insert_sauce_answer}/>
                         <br/>
                         <button type="submit">{i18next.t("button_save")}</button>
                     </form>
@@ -53,7 +57,23 @@ class Creator extends Component {
     }
 }
 
-class Editor extends Component {
+type EditorState = {
+    id: number,
+    question: string,
+    answer: string,
+}
+
+type EditorProps = {
+    saucepanId: number,
+    id: number,
+    question: string, 
+    answer: string
+    isShown: boolean,
+    onDismiss: Function,
+    onSubmit: Function,
+}
+
+class Editor extends Component<EditorProps, EditorState> {
     constructor(props) {
         super(props);
 
@@ -71,7 +91,7 @@ class Editor extends Component {
             <div className={rootClassName}>
                 <div className="wrapper">
                     <div className="dismiss-button-container">
-                        <button className="dismiss-button" onClick={this.props.onDismiss}><HiX id="icon"/></button>
+                        <button className="dismiss-button" onClick={() => this.props.onDismiss()}><HiX id="icon"/></button>
                     </div>
                     <div className="header">{i18next.t("header_edit_sauce")}</div>
 
@@ -82,7 +102,6 @@ class Editor extends Component {
                             id={update_sauce_id}
                             name={update_sauce_id}
                             value={this.state.id}
-                            ref={a => this.inputSauceId = a}
                             onChange={e => this.onInputChanged(e)}/>
                         <br/>
                         <label>{i18next.t("input_question")}</label>
@@ -91,7 +110,6 @@ class Editor extends Component {
                             id={update_sauce_question}
                             name={update_sauce_question}
                             value={this.state.question}
-                            ref={a => this.inputSauceQuestion = a}
                             onChange={e => this.onInputChanged(e)}/>
                         <br/>
                         <label>{i18next.t("input_answer")}</label>
@@ -100,7 +118,6 @@ class Editor extends Component {
                             id={update_sauce_answer}
                             name={update_sauce_answer}
                             value={this.state.answer}
-                            ref={a => this.inputSauceAnswer = a}
                             onChange={e => this.onInputChanged(e)}/>
                         <br/>
                         <button type="submit">{i18next.t("button_save")}</button>
