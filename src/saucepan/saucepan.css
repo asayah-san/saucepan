@@ -8,9 +8,13 @@
     height: 100%;
 }
 
+.saucepan-root > .wrapper > .header-container:hover .header-edit {
+    visibility: visible;
+    padding: 0;
+}
+
 .saucepan-root > .wrapper > .header-container > .header-wrapper {
     display: inline-block;
-    margin-right: var(--dimen-medium-padding);
 }
 
 .saucepan-root > .wrapper > .header-container > .header-wrapper > #header {
@@ -22,14 +26,13 @@
 
 .saucepan-root > .wrapper > .header-container form {
     display: inline-block;
+    margin-right: var(--dimen-medium-padding);
 }
 
 .saucepan-root > .wrapper > .header-container .header-edit {
+    visibility: hidden;
     padding: 0;
     background-color: transparent;
-}
-.saucepan-root > .wrapper > .header-container .header-edit:hover {
-    color: var(--color-primary);
 }
 
 .saucepan-root > .wrapper > .header-container form > #input_submit {

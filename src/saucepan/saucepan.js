@@ -47,6 +47,14 @@ class SaucepanHeader extends Component {
     }
 
     render() {
+        const renderEditButton = _ => {
+            if (!this.props.isInHeaderEditMode) {
+                return  <button className="header-edit" onClick={() => this.props.onHeaderEdit(true) }>
+                            <HiOutlinePencil/>
+                        </button>
+            }
+        }
+
         const renderInputOrMarkdown = _ => {
             if (!this.props.isInHeaderEditMode) {
                 return <span id="header">{this.state.header}</span>
@@ -75,9 +83,7 @@ class SaucepanHeader extends Component {
         return(
             <div className="header-container">
                 <div className="header-wrapper">{ renderInputOrMarkdown() }</div>
-                <button className="header-edit" onClick={() => this.props.onHeaderEdit(true) }>
-                    <HiOutlinePencil/>
-                </button>
+                { renderEditButton() }
             </div>
         );
     }
