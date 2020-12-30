@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { HiX } from 'react-icons/hi';
+import { IconX } from "@tabler/icons";
+import { Input, InputHint, TextButton, DismissButton } from '../components/components';
 import i18n from '../i18n';
-
-import './form.css';
 
 const insert_sauce_id = "_insert_id";
 const insert_sauce_question = "_insert_question";
@@ -11,6 +10,18 @@ const insert_sauce_answer = "_insert_answer";
 const update_sauce_id = "_update_id";
 const update_sauce_question = "_update_question";
 const update_sauce_answer = "_update_answer";
+
+type HeaderProps = {
+    header: string,
+    onDismiss: Function
+}
+
+const FormHeader = (props: HeaderProps) => {
+    return <div className="mb-8">
+                <DismissButton onClick={() => props.onDismiss()}/>
+                <span className="my-1 font-semibold text-white text-2xl">{i18n.t(props.header)}</span>
+            </div>
+}
 
 type CreatorProps = {
     saucepanId: number,
@@ -21,37 +32,33 @@ type CreatorProps = {
 
 class Creator extends Component<CreatorProps, {}> {
     render() {
-        const rootClassName = this.props.isShown ? "container container-show" : "container container-hide";
+        var creatorClassName = "p-4 bg-gray-800"
+        creatorClassName = this.props.isShown ? creatorClassName + " inline-block" : creatorClassName + " hidden";
 
         return(
-            <div className={rootClassName}>
-                <div className="wrapper">
-                    <div className="dismiss-button-container">
-                        <button className="dismiss-button" onClick={() => this.props.onDismiss()}><HiX id="icon"/></button>
-                    </div>
-                    <div className="header">{i18n.t("header_create_sauce")}</div>
+            <div className={creatorClassName}>
+                <FormHeader header="header_create_sauce" onDismiss={() => this.props.onDismiss()}/>                
 
-                    <form className="editor-form" onSubmit={e => this.props.onSubmit(this.props.saucepanId, e)}>
-                        <input
-                            type="hidden"
-                            id={insert_sauce_id}
-                            name={insert_sauce_id}/>
-                        <br/>
-                        <label>{i18n.t("input_question")}</label>
-                        <input
-                            type="text"
-                            id={insert_sauce_question}
-                            name={insert_sauce_question}/>
-                        <br/>
-                        <label>{i18n.t("input_answer")}</label>
-                        <input
-                            type="text"
-                            id={insert_sauce_answer}
-                            name={insert_sauce_answer}/>
-                        <br/>
-                        <button type="submit">{i18n.t("button_save")}</button>
-                    </form>
-                </div>
+                <form className="editor-form" onSubmit={e => this.props.onSubmit(this.props.saucepanId, e)}>
+                    <input
+                        type="hidden"
+                        id={insert_sauce_id}
+                        name={insert_sauce_id}/>
+                    <InputHint hint={i18n.t("input_question")}/>
+                    <Input
+                        background="bg-gray-700"
+                        type="text"
+                        id={insert_sauce_question}
+                        name={insert_sauce_question}/>
+                    <InputHint hint={i18n.t("input_answer")}/>
+                    <Input
+                        background="bg-gray-700 "
+                        type="text"
+                        id={insert_sauce_answer}
+                        name={insert_sauce_answer}/>
+                    <br/>
+                    <TextButton type="submit" text={i18n.t("button_save")}/>
+                </form>
             </div>
         );
     }
@@ -74,7 +81,7 @@ type EditorProps = {
 }
 
 class Editor extends Component<EditorProps, EditorState> {
-    constructor(props) {
+    constructor(props: EditorProps) {
         super(props);
 
         this.state = {
@@ -89,9 +96,9 @@ class Editor extends Component<EditorProps, EditorState> {
 
         return (
             <div className={rootClassName}>
-                <div className="wrapper">
+                <div className="form-wrapper">
                     <div className="dismiss-button-container">
-                        <button className="dismiss-button" onClick={() => this.props.onDismiss()}><HiX id="icon"/></button>
+                        <button className="dismiss-button" onClick={() => this.props.onDismiss()}><IconX id="icon"/></button>
                     </div>
                     <div className="header">{i18n.t("header_edit_sauce")}</div>
 
@@ -104,7 +111,7 @@ class Editor extends Component<EditorProps, EditorState> {
                             value={this.state.id}
                             onChange={e => this.onInputChanged(e)}/>
                         <br/>
-                        <label>{i18n.t("input_question")}</label>
+                        <InputHint hint={i18n.t("input_question")}/>
                         <input
                             type="text"
                             id={update_sauce_question}
@@ -112,7 +119,7 @@ class Editor extends Component<EditorProps, EditorState> {
                             value={this.state.question}
                             onChange={e => this.onInputChanged(e)}/>
                         <br/>
-                        <label>{i18n.t("input_answer")}</label>
+                        <InputHint hint={i18n.t("input_answer")}/>
                         <input
                             type="text"
                             id={update_sauce_answer}
@@ -120,7 +127,7 @@ class Editor extends Component<EditorProps, EditorState> {
                             value={this.state.answer}
                             onChange={e => this.onInputChanged(e)}/>
                         <br/>
-                        <button type="submit">{i18n.t("button_save")}</button>
+                        <TextButton type="submit" text={i18n.t("button_save")}/>
                     </form>
                 </div>
             </div>

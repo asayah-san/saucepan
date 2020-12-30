@@ -1,13 +1,13 @@
-import React, { Component, FormEvent } from 'react';
+import React, { Component, FormEvent, Fragment } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
+import { IconButton, NavigationItem } from '../components/components';
+import { IconPlus } from '@tabler/icons';
 import { Creator, Editor } from '../form/form';
-import { HiOutlinePlus } from "react-icons/all";
 import { Saucepan } from '../saucepan/saucepan';
 import { Sauce, Pan } from './types';
 import i18n from '../i18n';
 
 import 'react-toastify/dist/ReactToastify.css';
-import './core.css';
 
 type State = {
     saucepans: Pan[],
@@ -20,7 +20,7 @@ type State = {
 }
 
 class Core extends Component<{}, State> {
-    constructor(props) {
+    constructor(props: {}) {
         super(props);
 
         const saucepan: Pan = {
@@ -44,21 +44,20 @@ class Core extends Component<{}, State> {
     render() {
 
         const renderSaucepanList = () => {
-            return (<div>{
+            return (<Fragment>{
                 this.state.saucepans.map(saucepan => {
-                    let saucepanItemClassName = "saucepan-item";
+                    let isActive: boolean = false;
                     if (saucepan.id === this.state.currentSaucepanId) {
-                        saucepanItemClassName = saucepanItemClassName + " active";
+                        isActive = true;
                     }
 
-                    return <button
-                        key={saucepan.id}
-                        className={saucepanItemClassName}
-                        onClick={() => this.onSaucepanSwitched(saucepan)}>
-                        {renderSaucepanHeader(saucepan)}
-                    </button>
+                    return <NavigationItem 
+                                key={saucepan.id} 
+                                header={renderSaucepanHeader(saucepan)} 
+                                isActive={isActive}
+                                onClick={() => this.onSaucepanSwitched(saucepan)}/>
                 })
-            }</div>)
+            }</Fragment>)
         }
 
         const renderSaucepan = () => {
@@ -80,7 +79,7 @@ class Core extends Component<{}, State> {
             }
         }
 
-        const renderSaucepanHeader = saucepan => {
+        const renderSaucepanHeader = (saucepan: Pan) => {
             if (saucepan.name !== null)
                 return <span>{saucepan.name}</span>
             else return <span>{i18n.t("pan_name_fallback")}</span>
@@ -105,22 +104,20 @@ class Core extends Component<{}, State> {
                             onSubmit={this.onSauceInsert}
                             onDismiss={this.onExitCreateMode}/>
             }
-        }
+        } 
 
         return (
-            <div className="core-root">
-                <div className="wrapper">
-                    <div className="container">
-                        <div className="navigation-container">
-                            <div className="header">{i18n.t("app_name")}</div>
-                            <button className="saucepan-add" onClick={this.onSaucepanAdded}>
-                                <HiOutlinePlus/>
-                            </button>
-                            {renderSaucepanList()}
+            <div className="min-w-screen min-h-screen bg-gray-900">
+                <div className="min-w-screen min-h-screen flex flex-row flex-1">
+                    <div className="p-2 border-r-2 border-gray-700">
+                        <div className="p-1">
+                            <div className="my-4 font-medium text-2xl text-indigo-100">{i18n.t("app_name")}</div>
+                            <IconButton icon={<IconPlus/>} onClick={this.onSaucepanAdded}/>
+                            { renderSaucepanList() }
                         </div>
                     </div>
-                    <div className="container">{renderSaucepan()}</div>
-                    {renderSauceForm()}
+                    <div className="w-full p-4">{ renderSaucepan() }</div>
+                    { renderSauceForm() }
                 </div>
                 <ToastContainer />
             </div>

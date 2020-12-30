@@ -1,10 +1,10 @@
 import React from 'react';
-import i18n from '../i18n';
-import { HiOutlinePencil, HiOutlineTrash, HiOutlinePlus } from 'react-icons/hi';
+import { IconButton } from '../components/components';
+import { IconPencil, IconTrash, IconPlus } from '@tabler/icons';
 import ReactMarkdown from 'react-markdown';
+import { Sauce } from "../core/types";
 
-import './sauces.css';
-import {Sauce} from "../core/types";
+import '../assets/output.css';
 
 const md_bold = "**"
 const md_code = "```"
@@ -20,7 +20,7 @@ type ListProps = {
 }
 
 const List = (props: ListProps) => {
-    const renderItem = sauce => {
+    const renderItem = (sauce: Sauce) => {
         return <Item
                     key={sauce.id}
                     sauce={sauce}
@@ -32,13 +32,13 @@ const List = (props: ListProps) => {
                 />
     }
 
-    return <div className="sauce-list">
-            <button className="add-action" onClick={() => props.onCreate()}>
-                <div className="wrapper">
-                    <HiOutlinePlus id="icon"/>
-                </div>
-            </button>
-            {props.sauces.map(sauce => renderItem(sauce))}
+    return <div className="my-4 grid grid-cols-auto-sauce grid-rows-auto-sauce">
+                <button 
+                    className="bg-gray-800 border border-dashed rounded-md border-gray-500 hover:bg-gray-600 hover:shadow-md transition text-white" 
+                    onClick={() => props.onCreate()}>
+                        <IconPlus className="mx-auto"/>
+                </button>
+            { props.sauces.map(sauce => renderItem(sauce)) }
         </div>
 }
 
@@ -54,48 +54,29 @@ type ItemProps = {
 const Item = (props: ItemProps) => {
     const sauce = props.sauce;
 
-    const renderQuestion = question => {
-        return <div className="sauce-question">
-            { props.autoRenderToMarkdown
-                ? <ReactMarkdown>{question}</ReactMarkdown>
-                : {question}
-            }
-        </div>
-    }
-    const renderAnswer = answer => {
-        return <div className="sauce-answer">
-            { props.autoRenderToMarkdown
-                ? <ReactMarkdown>{answer}</ReactMarkdown>
-                : {answer}
-            }
-        </div>
-    }
-
     const question = md_bold.concat(sauce.question).concat(md_bold);
     const answer = md_code.concat(sauce.answer).concat(md_code);
     const output = question.concat("  ").concat(answer);
 
     return (
-        <div className="sauce-container" onClick={() => props.onCopy(output)}>
-            <div>
-                {renderQuestion(question)}
-                {renderAnswer(answer)}
+        <div className="flex flex-col justify-center p-4 border border-gray-600 rounded-md text-white" onClick={() => props.onCopy(output)}>
+            <div className="text-lg">
+                { props.autoRenderToMarkdown
+                    ? <ReactMarkdown>{question}</ReactMarkdown>
+                    : <span>{question}</span> }
             </div>
-            <div className="button-container">
-                <div className="button-wrapper">
-                    <button
-                        title={ i18n.t("button_copy") }
-                        onClick={ (e) => props.onEdit(sauce, e) }>
-                        <HiOutlinePencil/>
-                    </button>
-                </div>
-                <div className="button-wrapper">
-                    <button
-                        title={ i18n.t("button_remove") }
-                        onClick={ (e) => props.onRemove(props.saucepanId, sauce, e) }>
-                        <HiOutlineTrash/>
-                    </button>
-                </div>
+            <div className="text-md">
+                { props.autoRenderToMarkdown
+                    ? <ReactMarkdown>{answer}</ReactMarkdown>
+                    : <span>{answer}</span> }
+            </div>
+            <div className="mt-4">
+                <IconButton
+                    icon={<IconPencil/>}
+                    onClick={(e) => props.onEdit(sauce, e) }/>
+                <IconButton
+                    icon={<IconTrash/>}
+                    onClick={(e) => props.onRemove(props.saucepanId, sauce, e)}/>
             </div>
         </div>
     );

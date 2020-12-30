@@ -4,7 +4,7 @@ import { I18nextProvider } from 'react-i18next';
 import { Core } from './core/core';
 import i18n from './i18n';
 
-import './index.css';
+import './assets/output.css';
 
 ReactDOM.render(
 	<React.StrictMode>

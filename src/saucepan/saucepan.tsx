@@ -1,10 +1,9 @@
 import i18n from '../i18n';
-import React, { Component } from 'react';
-import { HiOutlinePencil } from 'react-icons/hi';
+import React, { Component, Fragment } from 'react';
+import { IconPencil } from "@tabler/icons";
+import { Input } from '../components/components';
 import { List } from '../sauces/sauces';
 import { Pan } from "../core/types";
-
-import './saucepan.css';
 
 const input_header_id = "input_id";
 const input_header_name = "input_name";
@@ -23,27 +22,25 @@ type SaucepanProps = {
 
 const Saucepan = (props: SaucepanProps) => {
     return (
-        <div className="saucepan-root">
-            <div className="wrapper">
-                <SaucepanHeader
-                    id={props.data.id}
-                    header={props.data.name}
-                    isInHeaderEditMode={props.isInHeaderEditMode}
-                    onHeaderEdit={props.onHeaderEdit}
-                    onHeaderChanged={props.onHeaderChanged}/>
-                <div className="container-main">
-                    <List
-                        saucepanId={props.data.id}
-                        sauces={props.data.sauces}
-                        autoRenderToMarkdown={props.autoRenderToMarkdown}
-                        onCreate={props.onCreate}
-                        onEdit={props.onEdit}
-                        onRemove={props.onRemove}
-                        onCopy={props.onCopy}
-                    />
-                </div>
-            </div>
-        </div>
+        <Fragment>
+            <SaucepanHeader
+                id={props.data.id}
+                header={props.data.name}
+                isInHeaderEditMode={props.isInHeaderEditMode}
+                onHeaderEdit={props.onHeaderEdit}
+                onHeaderChanged={props.onHeaderChanged}/>
+            <Fragment>
+                <List
+                    saucepanId={props.data.id}
+                    sauces={props.data.sauces}
+                    autoRenderToMarkdown={props.autoRenderToMarkdown}
+                    onCreate={props.onCreate}
+                    onEdit={props.onEdit}
+                    onRemove={props.onRemove}
+                    onCopy={props.onCopy}
+                />
+            </Fragment>
+        </Fragment>
     );
 }
 
@@ -60,7 +57,7 @@ type SaucepanHeaderState = {
 }
 
 class SaucepanHeader extends Component<SaucepanHeaderProps, SaucepanHeaderState> {
-    constructor(props) {
+    constructor(props: SaucepanHeaderProps) {
         super(props);
 
         this.state = {
@@ -71,15 +68,17 @@ class SaucepanHeader extends Component<SaucepanHeaderProps, SaucepanHeaderState>
     render() {
         const renderEditButton = () => {
             if (!this.props.isInHeaderEditMode) {
-                return  <button className="header-edit" onClick={() => this.props.onHeaderEdit(true) }>
-                            <HiOutlinePencil/>
+                return  <button 
+                            className="text-xs text-transparent hover:text-white" 
+                            onClick={() => this.props.onHeaderEdit(true) }>
+                            <IconPencil/>
                         </button>
             }
         }
 
         const renderInputOrMarkdown = () => {
             if (!this.props.isInHeaderEditMode) {
-                return <span id="header">{this.state.header}</span>
+                return <span className="font-bold text-3xl text-white" onClick={() => this.props.onHeaderEdit(true)}>{this.state.header}</span>
             } else {
                 return <form onSubmit={e => this.props.onHeaderChanged(e)}>
                             <input
@@ -87,13 +86,14 @@ class SaucepanHeader extends Component<SaucepanHeaderProps, SaucepanHeaderState>
                                 id={input_header_id}
                                 name={input_header_name}
                                 value={this.props.id}/>
-                            <input
+                            <Input
                                 type="text"
                                 id={input_header_name}
                                 name={input_header_name}
                                 value={this.state.header}
                                 onChange={e => this.onInputChanged(e)}/>
                             <input
+                                className="hidden"
                                 type="submit"
                                 id="input_submit"/>
                         </form>
@@ -101,8 +101,8 @@ class SaucepanHeader extends Component<SaucepanHeaderProps, SaucepanHeaderState>
         }
 
         return(
-            <div className="header-container">
-                <div className="header-wrapper">{ renderInputOrMarkdown() }</div>
+            <div className="p-1">
+                { renderInputOrMarkdown() }
                 { renderEditButton() }
             </div>
         );

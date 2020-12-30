@@ -25,6 +25,6 @@ i18n.use(LanguageDetector).init({
     react: {
         wait: true
     }
-})
+}).then();
 
 export default i18n;
