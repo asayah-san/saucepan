@@ -16,7 +16,7 @@ type HeaderProps = {
 }
 
 const FormHeader = (props: HeaderProps) => {
-    return <div className="mb-8">
+    return <div className="mb-8 flex flex-row items-center">
                 <DismissButton onClick={() => props.onDismiss()}/>
                 <span className="my-1 font-semibold text-white text-2xl">{i18n.t(props.header)}</span>
             </div>
@@ -31,14 +31,14 @@ type CreatorProps = {
 
 class Creator extends Component<CreatorProps, {}> {
     render() {
-        var creatorTheme = "p-4 bg-gray-700 shadow-xl ";
+        var creatorTheme = "p-4 bg-gray-800 ";
         creatorTheme += this.props.isShown ? + " inline-block" : + " hidden";
 
         return (
             <div className={creatorTheme}>
                 <FormHeader header="header_create_sauce" onDismiss={() => this.props.onDismiss()}/>                
 
-                <form className="editor-form" onSubmit={e => this.props.onSubmit(this.props.saucepanId, e)}>
+                <form onSubmit={e => this.props.onSubmit(this.props.saucepanId, e)}>
                     <input
                         type="hidden"
                         id={insert_sauce_id}
@@ -51,7 +51,7 @@ class Creator extends Component<CreatorProps, {}> {
                         name={insert_sauce_question}/>
                     <InputHint hint={i18n.t("input_answer")}/>
                     <Input
-                        background="bg-gray-700 "
+                        background="bg-gray-700"
                         type="text"
                         id={insert_sauce_answer}
                         name={insert_sauce_answer}/>
@@ -91,22 +91,20 @@ class Editor extends Component<EditorProps, EditorState> {
     }
 
     render() {
-        var editorTheme = "p-4 bg-gray-700 shadow-xl ";
+        var editorTheme = "p-4 bg-gray-800 ";
         editorTheme += this.props.isShown ? + " inline-block" : + " hidden";
 
         return (
             <div className={editorTheme}>
                 <FormHeader header="header_edit_sauce" onDismiss={() => this.props.onDismiss()}/>                
 
-                <form className="editor-form"
-                        onSubmit={e => this.props.onSubmit(this.props.saucepanId, this.props.id, e)}>
+                <form onSubmit={e => this.props.onSubmit(this.props.saucepanId, this.props.id, e)}>
                     <input
                         type="hidden"
                         id={update_sauce_id}
                         name={update_sauce_id}
                         value={this.state.id}
                         onChange={e => this.onInputChanged(e)}/>
-                    <br/>
                     <InputHint hint={i18n.t("input_question")}/>
                     <Input
                         background="bg-gray-700"
@@ -115,7 +113,6 @@ class Editor extends Component<EditorProps, EditorState> {
                         name={update_sauce_question}
                         value={this.state.question}
                         onChange={e => this.onInputChanged(e)}/>
-                    <br/>
                     <InputHint hint={i18n.t("input_answer")}/>
                     <Input
                         background="bg-gray-700"

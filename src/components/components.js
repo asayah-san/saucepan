@@ -31,7 +31,7 @@ const Input = (props) => {
 
 const DismissButton = (props) => {
     return  <button
-                className="flex-grow justify-items-center items-center py-1 px-1.5 rounded-md bg-transparent hover:bg-red-500 text-white"
+                className="w-max mr-2 p-2 rounded-md bg-transparent hover:bg-red-500 text-white"
                 type={props.type}
                 id={props.id}
                 name={props.name}
@@ -81,7 +81,7 @@ const TextButton = (props) => {
 
 const NavigationItem = (props) => {
     return  <button 
-                className="w-full mt-2 p-2 rounded-md text-left bg-indigo-500 bg-opacity-20 text-indigo-500 hover:bg-indigo-700 hover:text-white"
+                className="w-full mt-2 p-2 rounded-md text-left overflow-ellipsis bg-indigo-500 bg-opacity-20 text-indigo-500 hover:bg-indigo-700 hover:text-white"
                 id={props.id}
                 name={props.name}
                 text={props.header} 

@@ -82,7 +82,7 @@ class Core extends Component<{}, State> {
         const renderSaucepanHeader = (saucepan: Pan) => {
             if (saucepan.name !== null)
                 return <span>{saucepan.name}</span>
-            else return <span>{i18n.t("pan_name_fallback")}</span>
+            else return <span>{i18n.t("saucepan_name_fallback")}</span>
         }
 
         const renderSauceForm = () => {
@@ -108,15 +108,15 @@ class Core extends Component<{}, State> {
 
         return (
             <div className="min-w-screen min-h-screen bg-gray-900">
-                <div className="min-w-screen min-h-screen flex flex-row flex-1">
-                    <div className="p-2 border-r-2 border-gray-700">
+                <div className="min-w-screen min-h-screen flex flex-row">
+                    <div className="w-20 p-2 border-r-2 border-gray-700 flex-shrink-0">
                         <div className="p-1">
                             <div className="my-4 font-medium text-2xl text-indigo-100">{i18n.t("app_name")}</div>
                             <IconButton icon={<IconPlus/>} onClick={this.onSaucepanAdded}/>
                             { renderSaucepanList() }
                         </div>
                     </div>
-                    <div className="w-full p-4">{ renderSaucepan() }</div>
+                    <div className="w-full p-4 flex-auto ">{ renderSaucepan() }</div>
                     { renderSauceForm() }
                 </div>
                 <ToastContainer />
@@ -156,7 +156,7 @@ class Core extends Component<{}, State> {
         this.setState({ isInHeaderEditMode: status });
     }
 
-    onSaucepanHeaderChanged = event => {
+    onSaucepanHeaderChanged = (event: FormEvent)=> {
         event.preventDefault();
 
         const id: number = +event.target[0].value;

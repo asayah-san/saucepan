@@ -9,7 +9,6 @@
     "button_cancel": "Cancel",
     "input_question": "Question",
     "input_answer": "Answer",
-    "input_auto_render": "Render to Markdown",
     "feedback_saucepan_added": "Saucepan added",
     "feedback_sauce_added": "Sauce added",
     "feedback_sauce_removed": "Sauce removed",
@@ -17,5 +16,5 @@
     "feedback_sauce_copied": "Sauce copied",
     "header_create_sauce": "Create Sauce",
     "header_edit_sauce": "Edit Sauce",
-    "pan_name_fallback": "Unnamed Saucepan "
+    "saucepan_name_fallback": "Unnamed Saucepan "
 }

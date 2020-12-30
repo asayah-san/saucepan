@@ -631,12 +631,16 @@ video {
   justify-content: center !important;
 }
 
-.flex-1 {
-  flex: 1 1 0% !important;
+.flex-grow-0 {
+  flex-grow: 0 !important;
 }
 
 .flex-grow {
   flex-grow: 1 !important;
+}
+
+.flex-shrink-0 {
+  flex-shrink: 0 !important;
 }
 
 .font-medium {
@@ -833,6 +837,10 @@ video {
 .hover\:text-white:hover {
   --tw-text-opacity: 1 !important;
   color: rgba(255, 255, 255, var(--tw-text-opacity)) !important;
+}
+
+.overflow-ellipsis {
+  text-overflow: ellipsis !important;
 }
 
 .uppercase {
