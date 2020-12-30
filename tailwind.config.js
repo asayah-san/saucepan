@@ -11,6 +11,10 @@ module.exports = {
 	darkMode: false, // or 'media' or 'class',
 	theme: {
 		extend: {
+			flex: {
+				'navigation': '0 0 16rem',
+				'content': '1 1 auto',
+			},
 			fontFamily: {
 				'sans': ['Inter', 'Sans-serif']
 			},

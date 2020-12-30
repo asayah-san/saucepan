@@ -61,7 +61,7 @@ class SaucepanHeader extends Component<SaucepanHeaderProps, SaucepanHeaderState>
         super(props);
 
         this.state = {
-            header: this.props.header !== null ? this.props.header : i18n.t("pan_name_fallback")
+            header: this.props.header !== null ? this.props.header : i18n.t("saucepan_name_fallback")
         }
     }
 

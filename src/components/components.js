@@ -81,7 +81,7 @@ const TextButton = (props) => {
 
 const NavigationItem = (props) => {
     return  <button 
-                className="w-full mt-2 p-2 rounded-md text-left overflow-ellipsis bg-indigo-500 bg-opacity-20 text-indigo-500 hover:bg-indigo-700 hover:text-white"
+                className="w-full mt-2 p-2 rounded-md text-left bg-indigo-500 bg-opacity-20 text-indigo-500 hover:bg-indigo-700 hover:text-white"
                 id={props.id}
                 name={props.name}
                 text={props.header} 

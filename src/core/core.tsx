@@ -109,14 +109,14 @@ class Core extends Component<{}, State> {
         return (
             <div className="min-w-screen min-h-screen bg-gray-900">
                 <div className="min-w-screen min-h-screen flex flex-row">
-                    <div className="w-20 p-2 border-r-2 border-gray-700 flex-shrink-0">
+                    <div className="p-2 border-r-2 border-gray-700 flex-shrink-0 flex-grow-0 flex-navigation">
                         <div className="p-1">
                             <div className="my-4 font-medium text-2xl text-indigo-100">{i18n.t("app_name")}</div>
                             <IconButton icon={<IconPlus/>} onClick={this.onSaucepanAdded}/>
                             { renderSaucepanList() }
                         </div>
                     </div>
-                    <div className="w-full p-4 flex-auto ">{ renderSaucepan() }</div>
+                    <div className="p-4 flex-content">{ renderSaucepan() }</div>
                     { renderSauceForm() }
                 </div>
                 <ToastContainer />
