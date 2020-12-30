@@ -5,6 +5,7 @@ import { Core } from './core/core';
 import i18n from './i18n';
 
 import './assets/output.css';
+import './index.css';
 
 ReactDOM.render(
 	<React.StrictMode>

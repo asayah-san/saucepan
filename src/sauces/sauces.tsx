@@ -32,7 +32,7 @@ const List = (props: ListProps) => {
                 />
     }
 
-    return <div className="my-4 grid grid-cols-auto-sauce grid-rows-auto-sauce">
+    return <div className="my-4 grid gap-2 grid-cols-auto-sauce grid-rows-auto-sauce">
                 <button 
                     className="bg-gray-800 border border-dashed rounded-md border-gray-500 hover:bg-gray-600 hover:shadow-md transition text-white" 
                     onClick={() => props.onCreate()}>
@@ -70,7 +70,7 @@ const Item = (props: ItemProps) => {
                     ? <ReactMarkdown>{answer}</ReactMarkdown>
                     : <span>{answer}</span> }
             </div>
-            <div className="mt-4">
+            <div className="mt-4 space-x-2">
                 <IconButton
                     icon={<IconPencil/>}
                     onClick={(e) => props.onEdit(sauce, e) }/>
