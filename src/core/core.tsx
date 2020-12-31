@@ -24,13 +24,13 @@ class Core extends Component<{}, State> {
         super(props);
 
         const saucepan: Pan = {
-            id: Date.now(),
+            _id: Date.now(),
             name: null,
             sauces: []
         }
         this.state = { 
             saucepans: [ saucepan ],
-            currentSaucepanId: saucepan.id,
+            currentSaucepanId: saucepan._id,
 
             isSauceRenderedInMarkdown: true,
             isInCreateMode: false,
@@ -39,6 +39,7 @@ class Core extends Component<{}, State> {
             
             currentSauce: null,
         }
+
     }
 
     render() {
@@ -47,12 +48,12 @@ class Core extends Component<{}, State> {
             return (<Fragment>{
                 this.state.saucepans.map(saucepan => {
                     let isActive: boolean = false;
-                    if (saucepan.id === this.state.currentSaucepanId) {
+                    if (saucepan._id === this.state.currentSaucepanId) {
                         isActive = true;
                     }
 
                     return <NavigationItem 
-                                key={saucepan.id} 
+                                key={saucepan._id} 
                                 header={renderSaucepanHeader(saucepan)} 
                                 isActive={isActive}
                                 onClick={() => this.onSaucepanSwitched(saucepan)}/>
@@ -61,7 +62,7 @@ class Core extends Component<{}, State> {
         }
 
         const renderSaucepan = () => {
-            const index = this.state.saucepans.findIndex(saucepan => saucepan.id === this.state.currentSaucepanId);
+            const index = this.state.saucepans.findIndex(saucepan => saucepan._id === this.state.currentSaucepanId);
 
             if (index > -1) {
                 const saucepan = this.state.saucepans[index];
@@ -90,7 +91,7 @@ class Core extends Component<{}, State> {
                 const sauce = this.state.currentSauce;
 
                 return <Editor
-                            id={sauce.id}
+                            id={sauce._id}
                             question={sauce.question}
                             answer={sauce.answer}
                             saucepanId={this.state.currentSaucepanId}
@@ -108,8 +109,8 @@ class Core extends Component<{}, State> {
 
         return (
             <div className="min-w-screen min-h-screen bg-gray-900">
-                <div className="min-w-screen min-h-screen flex flex-row">
-                    <div className="p-2 border-r-2 border-gray-700 flex-shrink-0 flex-grow-0 flex-navigation">
+                <div className="min-w-screen min-h-screen fixed z-10 md:flex md:flex-row">
+                    <div className="top-0 left-0 overflow-x-hidden hidden p-2 border-r-2 border-gray-700 flex-shrink-0 flex-grow-0 flex-navigation md:flex-md-navigation md:block">
                         <div className="p-1">
                             <div className="my-4 font-medium text-2xl text-indigo-100">{i18n.t("app_name")}</div>
                             <IconButton icon={<IconPlus/>} onClick={this.onSaucepanAdded}/>
@@ -117,7 +118,7 @@ class Core extends Component<{}, State> {
                         </div>
                     </div>
                     <div className="p-4 flex-content">{ renderSaucepan() }</div>
-                    { renderSauceForm() }
+                    { renderSauceForm() }   
                 </div>
                 <ToastContainer />
             </div>
@@ -127,7 +128,7 @@ class Core extends Component<{}, State> {
     onSaucepanAdded = () => {
         this.setState({
             saucepans: this.state.saucepans.concat({
-                id: Date.now(),
+                _id: Date.now(),
                 name: null,
                 sauces: []
             }),
@@ -138,7 +139,7 @@ class Core extends Component<{}, State> {
     onSaucepanModified = (saucepan: Pan) => {
         let currentSaucepans: Pan[] = this.state.saucepans;
         
-        let index = currentSaucepans.findIndex(pan => saucepan.id === pan.id);
+        let index = currentSaucepans.findIndex(pan => saucepan._id === pan._id);
         if (index > - 1) {
             currentSaucepans[index] = saucepan;
 
@@ -149,7 +150,7 @@ class Core extends Component<{}, State> {
     }
 
     onSaucepanSwitched = (saucepan: Pan) => {
-        this.setState({ currentSaucepanId: saucepan.id });
+        this.setState({ currentSaucepanId: saucepan._id });
     }
 
     onSaucepanHeaderEdit = (status: boolean) => {
@@ -163,7 +164,7 @@ class Core extends Component<{}, State> {
         const name: string = event.target[1].value;
 
         if (id !== null && name !== null) {
-            const saucepan = this.state.saucepans.find(saucepan => saucepan.id === id);
+            const saucepan = this.state.saucepans.find(saucepan => saucepan._id === id);
 
             if (saucepan) {
                 saucepan.name = name;
@@ -184,12 +185,12 @@ class Core extends Component<{}, State> {
                 return
 
         const sauce: Sauce = {
-            id: Date.now(),
+            _id: Date.now(),
             question: _question,
             answer: _answer
         };
 
-        const saucepan = this.state.saucepans.find(saucepan => saucepanId === saucepan.id);
+        const saucepan = this.state.saucepans.find(saucepan => saucepanId === saucepan._id);
         if (saucepan) {
             saucepan.sauces = saucepan.sauces.concat(sauce);
             
@@ -202,10 +203,10 @@ class Core extends Component<{}, State> {
     onSauceRemove = (saucepanId: number, sauce: Sauce, event: FormEvent) => {
         event.stopPropagation();
 
-        const saucepan = this.state.saucepans.find(saucepan => saucepan.id === saucepanId);
+        const saucepan = this.state.saucepans.find(saucepan => saucepan._id === saucepanId);
         if (saucepan) {
             saucepan.sauces = saucepan.sauces.filter(function(it) {
-                return it.id !== sauce.id;
+                return it._id !== sauce._id;
             });
 
             this.onSaucepanModified(saucepan);
@@ -231,10 +232,10 @@ class Core extends Component<{}, State> {
             return
         }
 
-        const saucepan = this.state.saucepans.find(saucepan => saucepan.id === saucepanId);
+        const saucepan = this.state.saucepans.find(saucepan => saucepan._id === saucepanId);
 
         if (saucepan) {
-            const index = saucepan.sauces.findIndex(sauce => sauce.id === sauceId);
+            const index = saucepan.sauces.findIndex(sauce => sauce._id === sauceId);
 
             if (index > -1) {
                 const sauce = saucepan.sauces[index];

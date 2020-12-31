@@ -547,6 +547,11 @@ video {
   background-color: rgba(239, 68, 68, var(--tw-bg-opacity)) !important;
 }
 
+.hover\:bg-indigo-500:hover {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgba(99, 102, 241, var(--tw-bg-opacity)) !important;
+}
+
 .hover\:bg-indigo-700:hover {
   --tw-bg-opacity: 1 !important;
   background-color: rgba(67, 56, 202, var(--tw-bg-opacity)) !important;
@@ -561,14 +566,14 @@ video {
   border-color: rgba(107, 114, 128, var(--tw-border-opacity)) !important;
 }
 
-.border-gray-600 {
-  --tw-border-opacity: 1 !important;
-  border-color: rgba(75, 85, 99, var(--tw-border-opacity)) !important;
-}
-
 .border-gray-700 {
   --tw-border-opacity: 1 !important;
   border-color: rgba(55, 65, 81, var(--tw-border-opacity)) !important;
+}
+
+.hover\:border-indigo-500:hover {
+  --tw-border-opacity: 1 !important;
+  border-color: rgba(99, 102, 241, var(--tw-border-opacity)) !important;
 }
 
 .rounded-md {
@@ -589,6 +594,10 @@ video {
 
 .box-border {
   box-sizing: border-box !important;
+}
+
+.cursor-pointer {
+  cursor: pointer !important;
 }
 
 .inline-block {
@@ -628,7 +637,7 @@ video {
 }
 
 .flex-navigation {
-  flex: 0 0 16rem !important;
+  flex: 0 0 1rem !important;
 }
 
 .flex-content {
@@ -712,10 +721,6 @@ video {
   margin-right: 0.5rem !important;
 }
 
-.mt-4 {
-  margin-top: 1rem !important;
-}
-
 .mb-8 {
   margin-bottom: 2rem !important;
 }
@@ -729,10 +734,6 @@ video {
   outline-offset: 2px !important;
 }
 
-.overflow-hidden {
-  overflow: hidden !important;
-}
-
 .p-1 {
   padding: 0.25rem !important;
 }
@@ -743,6 +744,10 @@ video {
 
 .p-4 {
   padding: 1rem !important;
+}
+
+.p-6 {
+  padding: 1.5rem !important;
 }
 
 .py-1 {
@@ -832,16 +837,8 @@ video {
   color: rgba(255, 255, 255, var(--tw-text-opacity)) !important;
 }
 
-.overflow-ellipsis {
-  text-overflow: ellipsis !important;
-}
-
 .uppercase {
   text-transform: uppercase !important;
-}
-
-.whitespace-nowrap {
-  white-space: nowrap !important;
 }
 
 .w-full {
@@ -905,6 +902,25 @@ video {
 }
 
 @media (min-width: 768px) {
+  .md\:block {
+    display: block !important;
+  }
+
+  .md\:flex {
+    display: flex !important;
+  }
+
+  .md\:hidden {
+    display: none !important;
+  }
+
+  .md\:flex-row {
+    flex-direction: row !important;
+  }
+
+  .md\:flex-md-navigation {
+    flex: 0 0 16rem !important;
+  }
 }
 
 @media (min-width: 1024px) {

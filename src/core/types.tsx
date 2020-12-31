@@ -1,11 +1,11 @@
 type Sauce = {
-    id: number,
+    _id: number,
     question: string,
     answer: string
 }
 
 type Pan = {
-    id: number,
+    _id: number,
     name: string,
     sauces: Sauce[]
 }

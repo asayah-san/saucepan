@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FormEvent } from 'react';
 import { IconButton } from '../components/components';
 import { IconPencil, IconTrash, IconPlus } from '@tabler/icons';
 import ReactMarkdown from 'react-markdown';
@@ -59,7 +59,7 @@ const Item = (props: ItemProps) => {
     const output = question.concat("  ").concat(answer);
 
     return (
-        <div className="flex flex-col justify-center p-4 border border-gray-600 rounded-md text-white" onClick={() => props.onCopy(output)}>
+        <div className="flex flex-col justify-center p-6 border rounded-md text-white cursor-pointer hover:bg-indigo-500 hover:border-indigo-500" onClick={() => props.onCopy(output)}>
             <div className="text-lg">
                 { props.autoRenderToMarkdown
                     ? <ReactMarkdown>{question}</ReactMarkdown>
@@ -70,13 +70,13 @@ const Item = (props: ItemProps) => {
                     ? <ReactMarkdown>{answer}</ReactMarkdown>
                     : <span>{answer}</span> }
             </div>
-            <div className="mt-4 space-x-2">
+            <div className="space-x-2">
                 <IconButton
                     icon={<IconPencil/>}
-                    onClick={(e) => props.onEdit(sauce, e) }/>
+                    onClick={(e: FormEvent) => props.onEdit(sauce, e) }/>
                 <IconButton
                     icon={<IconTrash/>}
-                    onClick={(e) => props.onRemove(props.saucepanId, sauce, e)}/>
+                    onClick={(e: FormEvent) => props.onRemove(props.saucepanId, sauce, e) }/>
             </div>
         </div>
     );

@@ -1,6 +1,6 @@
 import i18n from '../i18n';
-import React, { Component, Fragment } from 'react';
-import { IconPencil } from "@tabler/icons";
+import React, { Component, FormEvent, Fragment } from 'react';
+import { IconPencil, IconMenu2 } from "@tabler/icons";
 import { Input } from '../components/components';
 import { List } from '../sauces/sauces';
 import { Pan } from "../core/types";
@@ -24,14 +24,14 @@ const Saucepan = (props: SaucepanProps) => {
     return (
         <Fragment>
             <SaucepanHeader
-                id={props.data.id}
+                id={props.data._id}
                 header={props.data.name}
                 isInHeaderEditMode={props.isInHeaderEditMode}
                 onHeaderEdit={props.onHeaderEdit}
                 onHeaderChanged={props.onHeaderChanged}/>
             <Fragment>
                 <List
-                    saucepanId={props.data.id}
+                    saucepanId={props.data._id}
                     sauces={props.data.sauces}
                     autoRenderToMarkdown={props.autoRenderToMarkdown}
                     onCreate={props.onCreate}
@@ -80,7 +80,7 @@ class SaucepanHeader extends Component<SaucepanHeaderProps, SaucepanHeaderState>
             if (!this.props.isInHeaderEditMode) {
                 return <span className="font-bold text-3xl text-white" onClick={() => this.props.onHeaderEdit(true)}>{this.state.header}</span>
             } else {
-                return <form onSubmit={e => this.props.onHeaderChanged(e)}>
+                return <form className="inline-block" onSubmit={e => this.props.onHeaderChanged(e)}>
                             <input
                                 type="hidden"
                                 id={input_header_id}
@@ -100,8 +100,9 @@ class SaucepanHeader extends Component<SaucepanHeaderProps, SaucepanHeaderState>
             }
         }
 
-        return(
+        return (
             <div className="p-1">
+                <button className="mr-2 p-2 text-white md:hidden"><IconMenu2/></button>
                 { renderInputOrMarkdown() }
                 { renderEditButton() }
             </div>

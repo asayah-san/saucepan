@@ -12,8 +12,10 @@ module.exports = {
 	theme: {
 		extend: {
 			flex: {
-				'navigation': '0 0 16rem',
+				'navigation': '0 0 1rem',
 				'content': '1 1 auto',
+				'md-navigation': '0 0 16rem',
+				'md-content': '1 1 auto',
 			},
 			fontFamily: {
 				'sans': ['Inter', 'Sans-serif']
@@ -29,5 +31,7 @@ module.exports = {
 	variants: {
 		extend: {},
 	},
-	plugins: [],
+	plugins: [
+		require('tailwindcss-debug-screens'),
+	],
 }
