@@ -3,6 +3,7 @@ import { IconButton } from '../components/components';
 import { IconPencil, IconTrash, IconPlus } from '@tabler/icons';
 import ReactMarkdown from 'react-markdown';
 import { Sauce } from "../core/types";
+import i18n from '../i18n';
 
 import '../assets/output.css';
 
@@ -22,7 +23,7 @@ type ListProps = {
 const List = (props: ListProps) => {
     const renderItem = (sauce: Sauce) => {
         return <Item
-                    key={sauce.id}
+                    key={sauce._id}
                     sauce={sauce}
                     saucepanId={props.saucepanId}
                     autoRenderToMarkdown={props.autoRenderToMarkdown}
@@ -59,7 +60,9 @@ const Item = (props: ItemProps) => {
     const output = question.concat("  ").concat(answer);
 
     return (
-        <div className="flex flex-col justify-center p-6 border rounded-md text-white cursor-pointer hover:bg-indigo-500 hover:border-indigo-500" onClick={() => props.onCopy(output)}>
+        <div
+            className="flex flex-col justify-center p-4 border rounded-md text-white cursor-pointer hover:bg-indigo-500 hover:border-indigo-500"
+            onClick={() => props.onCopy(output)}>
             <div className="text-lg">
                 { props.autoRenderToMarkdown
                     ? <ReactMarkdown>{question}</ReactMarkdown>
@@ -73,9 +76,11 @@ const Item = (props: ItemProps) => {
             <div className="space-x-2">
                 <IconButton
                     icon={<IconPencil/>}
+                    label={i18n.t("button_edit")}
                     onClick={(e: FormEvent) => props.onEdit(sauce, e) }/>
                 <IconButton
                     icon={<IconTrash/>}
+                    label={i18n.t("button_remove")}
                     onClick={(e: FormEvent) => props.onRemove(props.saucepanId, sauce, e) }/>
             </div>
         </div>

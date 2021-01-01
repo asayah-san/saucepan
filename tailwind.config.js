@@ -13,9 +13,9 @@ module.exports = {
 		extend: {
 			flex: {
 				'navigation': '0 0 1rem',
-				'content': '1 1 auto',
+				'content': '1 1 100%',
 				'md-navigation': '0 0 16rem',
-				'md-content': '1 1 auto',
+				'md-content': '1 1 100%',
 			},
 			fontFamily: {
 				'sans': ['Inter', 'Sans-serif']

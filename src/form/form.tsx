@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Input, InputHint, TextButton, DismissButton } from '../components/components';
+import { Input, Label, TextButton, DismissButton } from '../components/components';
 import i18n from '../i18n';
 
 const insert_sauce_id = "_insert_id";
@@ -43,13 +43,16 @@ class Creator extends Component<CreatorProps, {}> {
                         type="hidden"
                         id={insert_sauce_id}
                         name={insert_sauce_id}/>
-                    <InputHint hint={i18n.t("input_question")}/>
+                    <Label hint={i18n.t("input_question")} htmlFor={insert_sauce_question}/>
+                    <br/>
                     <Input
                         background="bg-gray-700"
                         type="text"
                         id={insert_sauce_question}
                         name={insert_sauce_question}/>
-                    <InputHint hint={i18n.t("input_answer")}/>
+                    <br/>
+                    <Label hint={i18n.t("input_answer")} htmlFor={insert_sauce_answer}/>
+                    <br/>
                     <Input
                         background="bg-gray-700"
                         type="text"
@@ -91,7 +94,7 @@ class Editor extends Component<EditorProps, EditorState> {
     }
 
     render() {
-        var editorTheme = "p-4 bg-gray-800 ";
+        let editorTheme = "p-4 bg-gray-800 ";
         editorTheme += this.props.isShown ? + " inline-block" : + " hidden";
 
         return (
@@ -105,7 +108,8 @@ class Editor extends Component<EditorProps, EditorState> {
                         name={update_sauce_id}
                         value={this.state.id}
                         onChange={e => this.onInputChanged(e)}/>
-                    <InputHint hint={i18n.t("input_question")}/>
+                    <Label hint={i18n.t("input_question")} htmlFor={update_sauce_question}/>
+                    <br/>
                     <Input
                         background="bg-gray-700"
                         type="text"
@@ -113,7 +117,9 @@ class Editor extends Component<EditorProps, EditorState> {
                         name={update_sauce_question}
                         value={this.state.question}
                         onChange={e => this.onInputChanged(e)}/>
-                    <InputHint hint={i18n.t("input_answer")}/>
+                    <br/>
+                    <Label hint={i18n.t("input_answer")} htmlFor={update_sauce_answer}/>
+                    <br/>
                     <Input
                         background="bg-gray-700"
                         type="text"

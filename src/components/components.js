@@ -1,17 +1,17 @@
 import React from 'react';
 import { IconX } from '@tabler/icons';
 
-const InputHint = (props) => {
-    var theme = "uppercase text-sm";
+const Label = (props) => {
+    let theme = "uppercase text-sm";
     theme += props.marginY || " my-1 ";
     theme += props.hintColor || " text-gray-200 ";
     theme += props.fontWeight || " font-semibold";
 
-    return <div className={theme}>{props.hint}</div>
+    return <label className={theme} htmlFor={props.htmlFor}>{props.hint}</label>
 }
 
 const Input = (props) => {
-    var theme = "rounded-md outline-none ring-2 ";
+    let theme = "rounded-md outline-none ring-2 ";
     theme += props.marginY || "my-2";
     theme += props.paddingX || " px-2 ";
     theme += props.paddingY || " py-1 ";
@@ -41,7 +41,7 @@ const DismissButton = (props) => {
 }
 
 const IconButton = (props) => {
-    var theme = "w-max box-border rounded-md font-medium";
+    let theme = "w-max box-border rounded-md font-medium";
     theme += props.paddingX || " px-2.5 ";
     theme += props.paddingY || " py-2 ";
     theme += props.marginX || " my-4 ";
@@ -55,13 +55,14 @@ const IconButton = (props) => {
                 type={props.type}
                 id={props.id}
                 name={props.name}
+                aria-label={props.label}
                 onClick={props.onClick}>
                     { props.icon }
                 </button>
 }
 
 const TextButton = (props) => {
-    var theme = "w-full box-border rounded-md font-medium ";
+    let theme = "w-full box-border rounded-md font-medium ";
     theme += props.paddingX || " px-2";
     theme += props.paddingY || " py-2";
     theme += props.marginY || " my-4";
@@ -74,20 +75,24 @@ const TextButton = (props) => {
                 type={props.type}
                 id={props.id}
                 name={props.name}
+                aria-label={props.text}
                 onClick={props.onClick}>
                     {props.text}
             </button>
 }
 
 const NavigationItem = (props) => {
+    let navigationTheme = "w-full mt-2 p-2 rounded-md text-left hover:bg-indigo-700 hover:text-white ";
+    navigationTheme += props.isActive ? " bg-indigo-400 bg-opacity-10 text-indigo-400" : " text-white ";
+
     return  <button 
-                className="w-full mt-2 p-2 rounded-md text-left bg-indigo-500 bg-opacity-20 text-indigo-500 hover:bg-indigo-700 hover:text-white"
+                className={navigationTheme}
                 id={props.id}
                 name={props.name}
-                text={props.header} 
-                onClick={props.onClick}>
+                onClick={props.onClick}
+                aria-label={props.header}>
                     {props.header}
             </button>
 }
 
-export { TextButton, IconButton, DismissButton, NavigationItem, Input, InputHint }
+export { TextButton, IconButton, DismissButton, NavigationItem, Input, Label }

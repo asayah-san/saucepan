@@ -1,5 +1,5 @@
 import i18n from '../i18n';
-import React, { Component, FormEvent, Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import { IconPencil, IconMenu2 } from "@tabler/icons";
 import { Input } from '../components/components';
 import { List } from '../sauces/sauces';
